@@ -17,7 +17,7 @@ public class ThrowerAnt extends Ant
 	 */
 	public ThrowerAnt()
 	{
-		super(1);
+		super(1, 2);
 		this.damage = 1;
 	}
 	
