@@ -2,6 +2,8 @@ package core;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 /**
  * An entire colony of ants and their tunnels.
  * @author Joel
@@ -116,13 +118,22 @@ public class AntColony
 	 */
 	public void deployAnt(Place place, Ant ant)
 	{
-		if(this.food >= ant.getFoodCost())
+		if(this.food >= ant.getFoodCost() && place.getAnt() == null) // ==Niall== Edit made here, added place.getAnt() == null to make sure food is only taken when the place is empty.
 		{
 			this.food -= ant.getFoodCost();
 			place.addInsect(ant);
 		}
-		else
+		else // ==Niall== Added this else statement to ensure that the correct error is displayed.
+			if (place.getAnt() != null) // ==Niall== These JOption panes should be paired with a future pause system to pause the game when they are showing.
+			{
+				JOptionPane.showMessageDialog(null, "There is already an ant here");
+				return;
+			}
+			else
+		{
 			System.out.println("Not enough food remains to place "+ant);
+			JOptionPane.showMessageDialog(null, "Not enough food to place ant");
+		}
 	}
 
 	/**

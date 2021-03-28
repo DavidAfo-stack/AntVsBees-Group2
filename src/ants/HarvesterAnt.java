@@ -12,13 +12,16 @@ public class HarvesterAnt extends Ant
 	/**
 	 * Creates a new Harvester Ant
 	 */
+	
 	public HarvesterAnt()
 	{
-		super(1);
+		super(1, 2);
 	}
 
 	public void action(AntColony colony)
 	{
+		colony.increaseFood(1);
+		
 		//TODO: Should produce one additional food for the colony		
-	}	
+	}
 }

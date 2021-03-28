@@ -123,7 +123,7 @@ public class Place
 		}
 		else
 			System.out.println("Already an ant in "+this); //report error
-	}
+	} // ==Niall== Something needs to be done about this, ant is not placed, but the food cost is taken
 
 	/**
 	 * Adds a bee to the place

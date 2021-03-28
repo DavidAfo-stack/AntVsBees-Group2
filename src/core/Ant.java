@@ -13,10 +13,10 @@ public abstract class Ant extends Insect
 	 * Creates a new Ant, with a food cost of 0.
 	 * @param armor The armor of the ant.
 	 */
-	public Ant(int armor)
+	public Ant(int armor, int food) // ==Niall== Added an int argument here named food so that the food cost can be modified in the individual ant classes
 	{
 		super(armor, null);
-		this.foodCost = 0;
+		this.foodCost = food;
 	}
 
 	/**
