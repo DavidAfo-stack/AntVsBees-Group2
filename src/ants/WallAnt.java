@@ -14,8 +14,7 @@ public class WallAnt extends Ant {
      * the wall ant has been developed with a large amor value
      */
     public WallAnt() {
-        super(4);
-        this.foodCost = 4;
+        super(4, 4); // armor and food added to the wall ant
     }
 
     /**
