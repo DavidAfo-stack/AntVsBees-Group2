@@ -18,6 +18,7 @@ public class AntColony
 	private Place queenPlace; //where the queen is
 	private ArrayList<Place> places; //the places in the colony
 	private ArrayList<Place> beeEntrances; //places which bees can enter (the starts of the tunnels)
+	public boolean paused;
 	
 	/**
 	 * Creates a new ant colony with the given layout.
@@ -126,13 +127,17 @@ public class AntColony
 		else // ==Niall== Added this else statement to ensure that the correct error is displayed.
 			if (place.getAnt() != null) // ==Niall== These JOption panes should be paired with a future pause system to pause the game when they are showing.
 			{
+				paused = true;
 				JOptionPane.showMessageDialog(null, "There is already an ant here");
+				paused = false;
 				return;
 			}
 			else
 		{
 			System.out.println("Not enough food remains to place "+ant);
+			paused = true;
 			JOptionPane.showMessageDialog(null, "Not enough food to place ant");
+			paused = false;
 		}
 	}
 
@@ -179,5 +184,10 @@ public class AntColony
 	public String toString()
 	{
 		return "Food: "+this.food+"; "+getAllBees() + "; "+getAllAnts();
-	}	
+	}
+	
+	public boolean getPaused()
+	{
+		return paused;
+	}
 }

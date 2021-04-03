@@ -51,6 +51,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	private int turn; //current game turn
 	private int frame; //time elapsed since last turn
 	private Timer clock;
+	private boolean paused;
 	
 	//ant properties (laoded from external files, stored as member variables)
 	private final ArrayList<String> ANT_TYPES;
@@ -100,6 +101,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		//game init stuff
 		this.colony = colony;
 		this.hive = hive;
+		this.paused = false;
 
 		//game clock tracking
 		this.frame = 0;
@@ -174,7 +176,18 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	 */
 	private void nextFrame()
 	{
-		if(frame == 0) //at the start of a turn
+		paused = colony.getPaused(); // This has to get the paused state from the colony, since this is where the dialog boxes are.
+		// This method of getting the pause state will likely need to be altered at a later point.
+		
+		if (paused) // ==Niall== This checks if paused is true and returns, preventing any frames from being drawn.
+		{
+			System.out.println("PAUSED");
+			
+			return;
+		}
+		
+		if(frame == 0) //at the start of a turn // ==Niall== So this means that the start of a turn is determined by the frames, so pausing has to be
+			// done in the drawing of the frames.
 		{
 			System.out.println("TURN: "+turn);
 
