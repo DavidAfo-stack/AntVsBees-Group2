@@ -54,7 +54,6 @@ public class AntColony
 			}
 			beeEntrances.add(curr); //current place is last item in the tunnel, so mark that it is a bee entrance
 		} //loop to next tunnel
-
 	}
 
 	/**
