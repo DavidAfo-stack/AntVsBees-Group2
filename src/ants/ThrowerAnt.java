@@ -1,4 +1,6 @@
 package ants;
+import java.util.ArrayList;
+
 import core.Ant;
 import core.AntColony;
 import core.Bee;
@@ -27,11 +29,15 @@ public class ThrowerAnt extends Ant
 	 */
 	public Bee getTarget()
 	{
-		return place.getClosestBee(0,3);
+		return place.getClosestBee(0, 3);
 	}
 	
 	public void action(AntColony colony)
 	{
+		ArrayList<Bee> bees = place.getAllBees(0, 8);
+		
+		System.out.println(bees);
+		
 		Bee target = getTarget();
 		if(target != null)
 		{

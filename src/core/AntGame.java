@@ -40,6 +40,8 @@ import ants.ThrowerAnt;
 @SuppressWarnings("serial")
 public class AntGame extends JPanel implements ActionListener, MouseListener
 {
+	PauseScreen pauseScreen = new PauseScreen();
+	
 	//game models
 	private AntColony colony;
 	private Hive hive;
@@ -53,6 +55,8 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	private int turn; //current game turn
 	private int frame; //time elapsed since last turn
 	private Timer clock;
+	private boolean paused;
+	private boolean buttonPaused;
 	
 	//ant properties (laoded from external files, stored as member variables)
 	private final ArrayList<String> ANT_TYPES;
@@ -63,6 +67,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	private final Image TUNNEL_IMAGE = ImageUtils.loadImage("img/tunnel.gif");	
 	private final Image BEE_IMAGE = ImageUtils.loadImage("img/bee.gif");
 	private final Image REMOVER_IMAGE = ImageUtils.loadImage("img/remover.gif");
+	private final Image PAUSE_IMAGE = ImageUtils.loadImage("img/pause.gif");
 	
 	//positioning constants
 	public static final Dimension FRAME_SIZE = new Dimension(1024,768);
@@ -85,9 +90,9 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	private Map<Place, Rectangle> colonyRects; //maps from a Place to its clickable rectangle (reverse lookup!)
 	private Map<Rectangle, Ant> antSelectorAreas; //maps from a clickable area to an Ant that can be deployed
 	private Rectangle removerArea; //click to remove an ant
+	private Rectangle pauseButton;
 	private Place tunnelEnd; //a Place representing the end of the tunnels (for drawing)
 	private Ant selectedAnt; //which ant is currently selected
-
 	//variables tracking animations
 	private Map<Bee,AnimPosition> allBeePositions; //maps from Bee to an object storing animation status
 	private ArrayList<AnimPosition> leaves; //leaves we're animating
@@ -102,6 +107,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		//game init stuff
 		this.colony = colony;
 		this.hive = hive;
+		this.paused = false;
 
 		//game clock tracking
 		this.frame = 0;
@@ -176,7 +182,11 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	 */
 	private void nextFrame()
 	{
-		if(frame == 0) //at the start of a turn
+		if (pauseChecker())
+			return;
+		
+		if(frame == 0) //at the start of a turn // ==Niall== So this means that the start of a turn is determined by the frames, so pausing has to be
+			// done in the drawing of the frames.
 		{
 			System.out.println("TURN: "+turn);
 
@@ -293,12 +303,21 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 				return; //stop searching
 			}
 		}
-
+		
 		//check if remover
 		if(removerArea.contains(pt)) {
 			selectedAnt = null; //mark as such
 			return; //stop searching
 		}
+		
+		if (pauseButton.contains(pt))
+		{
+			selectedAnt = null;
+			buttonPaused = true;
+			return;
+		}
+		else
+			buttonPaused = false;
 	}
 	
 	//Specifies and starts an animation for a Bee (moving to a particular place)
@@ -429,17 +448,71 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 			//food cost
 			g2d.drawString(""+ant.getFoodCost(), rect.x+(rect.width/2), rect.y+ANT_IMAGE_SIZE.height+4+PANEL_PADDING.height);
 		}
-
+		
+		if (buttonPaused)
+		{
+			g2d.setColor(Color.BLUE);
+			g2d.fill(pauseButton);
+		}
+		
 		//for removing an ant
-		if(this.selectedAnt == null) {
+		if(this.selectedAnt == null && !buttonPaused)
+		{
 			g2d.setColor(Color.BLUE);
 			g2d.fill(removerArea);
 		}		
 		g2d.setColor(Color.BLACK);
 		g2d.draw(removerArea);
+		g2d.draw(pauseButton);
+		g2d.drawImage(PAUSE_IMAGE, pauseButton.x+PANEL_PADDING.width, pauseButton.y+PANEL_PADDING.height, null);
 		g2d.drawImage(REMOVER_IMAGE, removerArea.x+PANEL_PADDING.width, removerArea.y+PANEL_PADDING.height, null);
 	}
 
+	private boolean pauseChecker() // This is an all purpose pause checker, for both the pause button and any error messages
+	// The boolean buttonPaused is for when the pause button is pressed, and paused is for when the error messages are displaying.
+	{
+		paused = colony.getPaused(); // ==Niall== This has to get the paused state from the colony, since this is where the dialog boxes are.
+		// ==Niall== This method of getting the pause state will likely need to be altered at a later point.
+		
+		if (buttonPaused) // This checks if the pause button has been pressed, if so it calls for the PauseScreen class to create a new JFrame
+		{
+			pauseScreen.createWindow();
+			
+			if (pauseScreen.getOpen())
+			{
+				pauseScreen.MainPauseLoop();
+				
+				return true;
+			}
+			
+			else if(!pauseScreen.getOpen()) // This is for checking if the pause screen is open.
+			{
+				buttonPaused = false;
+				paused = false;
+				pauseScreen.exists = false; // This value is changed here to make sure the window does not recreate itself when the final loop restarts.
+				return false;
+			}
+			
+			
+			System.out.println("Pause button pressed");
+			
+			return true;
+		}
+		
+		if (paused) // ==Niall== This checks if paused is true and returns, preventing any frames from being drawn.
+		{
+			System.out.println("PAUSED");
+			
+			if (pauseScreen.getOpen())
+			{
+				return true;
+			}
+			
+			return true;
+		}
+		else
+			return false;
+	}
 
 	/**
 	 * Initializes the Ant graphics for the game. This method loads Ant details from an external file.
@@ -530,6 +603,8 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		int width = ANT_IMAGE_SIZE.width + 2*PANEL_PADDING.width;
 		int height = ANT_IMAGE_SIZE.height + 2*PANEL_PADDING.height;
 		
+		pauseButton = new Rectangle (pos.x, pos.y, width, height);
+		pos.translate(width+2, 0);
 		removerArea = new Rectangle(pos.x, pos.y, width, height);
 		pos.translate(width+2, 0);
 		
@@ -568,12 +643,18 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	
 	public void actionPerformed(ActionEvent e)
 	{
+		if (pauseChecker()) // ==Niall== Added this to prevent actions from happening when the game is paused.
+			return;
+		
 		if(e.getSource() == clock) //in case we want buttons later or something
 			nextFrame();
 	}
 	
 	public void mousePressed(MouseEvent event)
 	{
+		if (pauseChecker()) // ==Niall== Added this to prevent actions from happening when the game is paused.
+			return;
+		
 		handleClick(event); //pass to synchronized method for thread safety!
 		this.repaint(); //request a repaint
 		if(!clock.isRunning())

@@ -9,6 +9,7 @@ public abstract class Insect
 {
 	protected int armor; //insect's current armor
 	protected Place place; //insect's current location
+	protected String insectType;
 	
 	/**
 	 * Creates a new Insect with the given armor in the given location
@@ -88,4 +89,18 @@ public abstract class Insect
 	{
 		return this.getClass().getName()+"["+armor+", "+place+"]"; //supports inheritance!
 	}
+	
+	public void deathrattle()
+	{
+		if (insectType == "fireAnt")
+		{
+			System.out.println("This is a fire ant");
+			return;
+		}
+		if (insectType == "throwerAnt")
+		{
+			System.out.println("This is a thrower ant");
+		}
+	}
+	
 }
