@@ -8,6 +8,7 @@ package core;
 public abstract class Ant extends Insect
 {
 	protected int foodCost; //the amount of food needed to make this ant
+	protected boolean blockBeePath; //An attribute to track if ant blocks bee==> Implemented by David.
 	
 	/**
 	 * Creates a new Ant, with a food cost of 0.
@@ -17,6 +18,7 @@ public abstract class Ant extends Insect
 	{
 		super(armor, null);
 		this.foodCost = food;
+		this.blockBeePath =  true; // set value to true to show that ant blocks bee
 	}
 
 	/**
@@ -34,5 +36,5 @@ public abstract class Ant extends Insect
 	public void leavePlace()
 	{
 		this.place.removeInsect(this);
-	}	
+	}
 }

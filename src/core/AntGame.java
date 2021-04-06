@@ -27,6 +27,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import ants.HungryAnt;
 import ants.ThrowerAnt;
 
 /**
@@ -135,7 +137,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		
 		//basic appearance
 		this.setPreferredSize(FRAME_SIZE);
-		this.setBackground(Color.WHITE);		
+		this.setBackground(Color.WHITE);
 		
 		//make and show the frame!
 		JFrame frame = new JFrame("Ants vs. Some-Bees");
@@ -197,7 +199,9 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 					if(target != null)
 						createLeaf(ant, target);
 				}
+
 				ant.action(colony); //take the action (actually completes the throw now)
+
 			}
 			
 			//bees take action!
