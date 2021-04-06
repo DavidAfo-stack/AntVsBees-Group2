@@ -1,5 +1,9 @@
 package core;
 
+import ants.FireAnt;
+import ants.NinjaAnt;
+import org.junit.Test;
+
 /**
  * Represents a Bee
  * @author YOUR NAME HERE
@@ -47,7 +51,19 @@ public class Bee extends Insect
 	 */
 	public boolean isBlocked()
 	{
-		return this.place.getAnt() != null;
+		//===> This was modified by David to handle the Ninja Ant invincible attribute
+		//The Ninja ant was implemented to not block bees in its place
+		if(this.place.getAnt() != null){
+			System.out.println(this.place.getAnt());
+		     if(this.place.getAnt().blockBeePath == false)
+			{
+				return false;
+			}
+			return this.place.getAnt().blockBeePath;
+		}else{
+			return false;
+			//return this.place.getAnt() != null;
+		}
 	}
 
 	/**

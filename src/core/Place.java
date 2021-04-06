@@ -73,6 +73,49 @@ public class Place
 		}
 		return null;
 	}
+
+	//new function
+	public ArrayList<Bee> getAllBees(int minDistance, int maxDistance) // Gets all of the bees in the current place's tunnel and returns it as an arraylist
+
+	{
+
+		ArrayList<Bee> beeArrayList = new ArrayList<Bee>();
+
+		Bee[] bees;
+
+		Place p = this;
+
+
+
+		for (int dist = 0; p!=null && dist <= maxDistance; dist++)
+
+		{
+
+			System.out.println("Number of Bees: " + p.bees.size());
+
+
+
+			if (dist >= minDistance && p.bees.size() > 0)
+
+			{
+
+				System.out.println("Bee found");
+
+
+
+				beeArrayList.addAll(p.bees);
+
+			}
+
+			p = p.entrance;
+
+		}
+
+
+
+		return beeArrayList;
+
+	}
 	
 	/**
 	 * Returns the name of the place
