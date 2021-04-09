@@ -16,9 +16,9 @@ public class AntColony
 	
 	private int food; //amount of food available
 	private Place queenPlace; //where the queen is
-	private ArrayList<Place> places; //the places in the colony
+	public ArrayList<Place> places; //the places in the colony
 	private ArrayList<Place> beeEntrances; //places which bees can enter (the starts of the tunnels)
-	public boolean paused;
+	public boolean paused; // ==Niall== True if the game is paused
 	
 	/**
 	 * Creates a new ant colony with the given layout.
