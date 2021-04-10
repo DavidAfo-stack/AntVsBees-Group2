@@ -34,7 +34,6 @@ public class FireAnt extends Ant {
             for (Bee bees : beesInPlace)
             {
                 bees.reduceArmor(this.damage);
-                break;
             }
             this.leavePlace();
         }
