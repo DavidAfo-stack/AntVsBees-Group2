@@ -68,7 +68,12 @@ public class Bee extends Insect {
 	 * otherwise it moves to the exit of its current place.
 	 */
 	public void action(AntColony colony) {
-		if (this.isBlocked())
+		/** David Afolabi
+		 * 	modified to check if the armor is greater than zero
+		 * 	and also check if the bee is blocked
+		 * 	this is implemented because the fire ant does a high damage to the bee
+ 		 */
+		if (this.armor > 0 && this.isBlocked())
 			sting(this.place.getAnt());
 		else if (this.armor > 0)
 			this.moveTo(this.place.getExit());

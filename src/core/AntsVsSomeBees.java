@@ -17,6 +17,5 @@ public class AntsVsSomeBees
 		//Hive hive = Hive.makeInsaneHive();
 		new AntGame(colony,hive); //launch the game
 		ThemeSong.themeSound("themesong.wav");//theme music for the game ==> David Afolabi
-
 	}
 }
