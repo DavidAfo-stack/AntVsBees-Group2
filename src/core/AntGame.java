@@ -28,6 +28,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import org.hamcrest.core.IsInstanceOf;
+
 import ants.HungryAnt;
 import ants.ThrowerAnt;
 
@@ -40,12 +42,12 @@ import ants.ThrowerAnt;
 @SuppressWarnings("serial")
 public class AntGame extends JPanel implements ActionListener, MouseListener
 {
-	PauseScreen pauseScreen = new PauseScreen();
+	PauseScreen pauseScreen;
 	
 	//game models
 	private AntColony colony;
 	private Hive hive;
-	private static final String ANT_FILE = "antlist.properties";	
+	private static final String ANT_FILE = "antlist.properties";
 	private static final String ANT_PKG = "ants";
 	
 	//game clock & speed
@@ -57,11 +59,12 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	private Timer clock;
 	private boolean paused;
 	private boolean buttonPaused;
+	private boolean shouldRun = true;
 	
 	//ant properties (laoded from external files, stored as member variables)
-	private final ArrayList<String> ANT_TYPES;
-	private final Map<String,Image> ANT_IMAGES;// = new HashMap<String,Image>();
-	private final Map<String,Color> LEAF_COLORS;// = new HashMap<String, Color>();
+	private ArrayList<String> ANT_TYPES;
+	private Map<String,Image> ANT_IMAGES;// = new HashMap<String,Image>();
+	private Map<String,Color> LEAF_COLORS;// = new HashMap<String, Color>();
 
 	//other images (stored as member variables)
 	private final Image TUNNEL_IMAGE = ImageUtils.loadImage("img/tunnel.gif");	
@@ -97,6 +100,9 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	private Map<Bee,AnimPosition> allBeePositions; //maps from Bee to an object storing animation status
 	private ArrayList<AnimPosition> leaves; //leaves we're animating
 	
+	//Main JFrame
+	JFrame mainFrame;
+	
 	/**
 	 * Creates a new game of Ants vs. Some-Bees, with the given colony and hive setup
 	 * @param colony The ant colony for the game
@@ -104,50 +110,55 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	 */
 	public AntGame(AntColony colony, Hive hive)
 	{
-		//game init stuff
-		this.colony = colony;
-		this.hive = hive;
-		this.paused = false;
-
-		//game clock tracking
-		this.frame = 0;
-		this.turn = 0;
-		this.clock = new Timer(1000/FPS, this);
-				
-		//member ant property storage variables
-		ANT_TYPES = new ArrayList<String>();
-		ANT_IMAGES = new HashMap<String,Image>();
-		LEAF_COLORS = new HashMap<String, Color>();
-		initializeAnts();
-
-		//tracking bee animations
-		allBeePositions = new HashMap<Bee, AnimPosition>();
-		initializeBees();
-		leaves = new ArrayList<AnimPosition>();
-		
-		//map clickable areas to what they refer to. Might be more efficient to use separate components, but this keeps everything together
-		antSelectorAreas = new HashMap<Rectangle, Ant>();	
-		colonyAreas = new HashMap<Rectangle, Place>();
-		colonyRects = new HashMap<Place, Rectangle>();
-		initializeAntSelector();
-		initializeColony();
-		
-		//adding interaction
-		this.addMouseListener(this);
-		
-		//basic appearance
-		this.setPreferredSize(FRAME_SIZE);
-		this.setBackground(Color.WHITE);
-		
-		//make and show the frame!
-		JFrame frame = new JFrame("Ants vs. Some-Bees");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.add(this);
-		frame.pack();
-		frame.setVisible(true);
+		startUp(colony, hive);
 	}
 
+	public void startUp(AntColony colony, Hive hive)
+	{
+		//game init stuff
+				this.colony = colony;
+				this.hive = hive;
+				this.paused = false;
+				pauseScreen = new PauseScreen(colony);
+				//game clock tracking
+				this.frame = 0;
+				this.turn = 0;
+				this.clock = new Timer(1000/FPS, this);
+						
+				//member ant property storage variables
+				ANT_TYPES = new ArrayList<String>();
+				ANT_IMAGES = new HashMap<String,Image>();
+				LEAF_COLORS = new HashMap<String, Color>();
+				initializeAnts();
+
+				//tracking bee animations
+				allBeePositions = new HashMap<Bee, AnimPosition>();
+				initializeBees();
+				leaves = new ArrayList<AnimPosition>();
+				
+				//map clickable areas to what they refer to. Might be more efficient to use separate components, but this keeps everything together
+				antSelectorAreas = new HashMap<Rectangle, Ant>();	
+				colonyAreas = new HashMap<Rectangle, Place>();
+				colonyRects = new HashMap<Place, Rectangle>();
+				initializeAntSelector();
+				initializeColony();
+				
+				//adding interaction
+				this.addMouseListener(this);
+				
+				//basic appearance
+				this.setPreferredSize(FRAME_SIZE);
+				this.setBackground(Color.WHITE);
+				
+				//make and show the frame!
+				mainFrame = new JFrame("Ants vs. Some-Bees");
+				mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				mainFrame.setResizable(false);
+				mainFrame.add(this);
+				mainFrame.pack();
+				mainFrame.setVisible(true);
+	}
+	
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g); //take care of anything else
@@ -182,6 +193,11 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	 */
 	private void nextFrame()
 	{
+		if (!shouldRun)
+		{
+			return;
+		}
+		
 		if (pauseChecker())
 			return;
 		
@@ -468,7 +484,8 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		g2d.drawImage(REMOVER_IMAGE, removerArea.x+PANEL_PADDING.width, removerArea.y+PANEL_PADDING.height, null);
 	}
 
-	private boolean pauseChecker() // This is an all purpose pause checker, for both the pause button and any error messages
+	// This is an all purpose pause checker, for both the pause button and any error messages
+	private boolean pauseChecker()
 	// The boolean buttonPaused is for when the pause button is pressed, and paused is for when the error messages are displaying.
 	{
 		paused = colony.getPaused(); // ==Niall== This has to get the paused state from the colony, since this is where the dialog boxes are.
@@ -477,6 +494,19 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		if (buttonPaused) // This checks if the pause button has been pressed, if so it calls for the PauseScreen class to create a new JFrame
 		{
 			pauseScreen.createWindow();
+			
+			if (pauseScreen.getRestart())
+			{
+				pauseScreen.restart = false;
+				
+				buttonPaused = false;
+				paused = false;
+				pauseScreen.exists = false;
+				
+				RestartGame();
+				
+				return false;
+			}
 			
 			if (pauseScreen.getOpen())
 			{
@@ -636,7 +666,44 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		return ant; //return the new ant
 	}
 	
-
+	/**
+	 * Is called by pressing the restart button on the pause menu
+	 * This removes all of the bees and ants from the game, clears the JFrame of all elements
+	 * creates a new instance of each colony and hive, and then creates a new instance of AntGame
+	 * I am concerned about the possibilities of this clogging computer memory, since each restarted game continues to run, stuck in
+	 * a loop from the frame method, however, it works for now.
+	 */
+	public void RestartGame()
+	{	
+		System.out.println("Restarting");
+		
+		Place[] places;
+		places = colony.getPlaces();
+		for(Place p : places)
+		{
+			colony.removeAnt(p);
+		}
+		ArrayList<Bee> bees;
+		bees = colony.getAllBees();
+		for (Bee b : bees)
+		{
+			b.reduceArmor(100);
+		}
+		
+		mainFrame.dispose();
+		mainFrame.removeAll();
+		
+		colony = new AntColony(3, 8, 0, 25);
+		hive = Hive.makeFullHive();
+		
+		shouldRun = false;
+		
+		new AntGame(colony, hive);
+		
+		// startUp(colony, hive);
+		
+	}
+	
 	////////////////////
 	// Event Handlers //
 	////////////////////
