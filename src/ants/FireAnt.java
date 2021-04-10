@@ -2,10 +2,7 @@ package ants;
 
 import core.*;
 
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FireAnt extends Ant {
     /**
@@ -18,7 +15,6 @@ public class FireAnt extends Ant {
         super(1, 4);
         this.damage = 3;
     }
-
      /**
      * this method overrides the reduceArmor method in the ant class
      * First, we get all the bees in the ant's place
@@ -28,15 +24,12 @@ public class FireAnt extends Ant {
      */
     @Override
     public void reduceArmor(int amount) {
-        this.armor -= amount;
-        if(armor <= 0) {
-            ArrayList<Bee> beesInPlace = place.getAllBees(0,8);
+            ArrayList<Bee> beesInPlace = getPlace().getAllBees(0,0);
             for (Bee bees : beesInPlace)
             {
                 bees.reduceArmor(this.damage);
             }
-            this.leavePlace();
-        }
+            super.reduceArmor(amount);
     }
 
     /**
