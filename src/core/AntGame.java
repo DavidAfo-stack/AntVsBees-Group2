@@ -71,6 +71,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	private final Image BEE_IMAGE = ImageUtils.loadImage("img/bee.gif");
 	private final Image REMOVER_IMAGE = ImageUtils.loadImage("img/remover.gif");
 	private final Image PAUSE_IMAGE = ImageUtils.loadImage("img/pause.gif");
+	private final Image WATER_IMAGE = ImageUtils.loadImage("img/water.gif");
 	
 	//positioning constants
 	public static final Dimension FRAME_SIZE = new Dimension(1024,768);
@@ -284,6 +285,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		}
 	}
 
+	
 	//
 	/**
 	 * Handles clicking on the screen (used for selecting and deploying ants).
@@ -374,8 +376,21 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		{
 			Rectangle rect = entry.getKey(); //rectangle area for this place
 			Place place = entry.getValue(); //place to draw
-
-			g2d.setColor(Color.BLACK);
+			
+			if (place.getWater())
+			{	
+				g2d.setColor(Color.CYAN);
+				g2d.fillRect((int)rect.getX(), (int)rect.getY(), (int)rect.getWidth(), (int)rect.getHeight());
+				
+				// g2d.drawImage(WATER_IMAGE, rect.x+PLACE_PADDING.width, rect.y+PLACE_PADDING.height, null);
+				// ==Niall== Initially I tried this with an image, but it didn't look very good, so I've instead changed the fill colour of the places
+				// that are filled with water.
+				
+			}
+			if (!place.getWater())
+			{
+				g2d.setColor(Color.BLACK);
+			}
 			g2d.draw(rect); //border box (where to click)
 
 			if(place != tunnelEnd) //don't draw for queen location
