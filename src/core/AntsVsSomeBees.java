@@ -1,15 +1,7 @@
 package core;
 
-//import sun.audio.AudioData;
-//import sun.audio.AudioPlayer;
-//import sun.audio.AudioStream;
-//import sun.audio.ContinuousAudioDataStream;
-
 import javax.sound.sampled.*;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * A driver for the Ants vs. Some-Bees game
@@ -23,6 +15,7 @@ public class AntsVsSomeBees
 		//Hive hive = Hive.makeTestHive(); //specify the attackers (the hive)
 		Hive hive = Hive.makeFullHive();
 		//Hive hive = Hive.makeInsaneHive();
+<<<<<<< HEAD
 		new AntGame(colony, hive); //launch the game
 		themeSound("themesong.wav"); //theme music for the game ==> David Afolabi
 
@@ -44,5 +37,9 @@ public class AntsVsSomeBees
 		int counter = 1;
 		clip.loop(counter++);
 		//String response = scanner.next();
+=======
+		new AntGame(colony,hive); //launch the game
+		ThemeSong.themeSound("themesong.wav");//theme music for the game ==> David Afolabi
+>>>>>>> 7c7564b025f5175e94bdff34d96b0af70587e753
 	}
 }

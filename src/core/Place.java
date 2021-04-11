@@ -103,9 +103,7 @@ public class Place
 
 	{
 		ArrayList<Bee> beeArrayList = new ArrayList<Bee>();
-
 		Bee[] bees;
-
 		Place p = this;
 		for (int dist = 0; p!=null && dist <= maxDistance; dist++)
 		{
@@ -115,9 +113,7 @@ public class Place
 				System.out.println("Bee found");
 				beeArrayList.addAll(p.bees);
 			}
-
 			p = p.entrance;
-
 		}
 		return beeArrayList;
 	}
