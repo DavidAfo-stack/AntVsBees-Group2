@@ -118,6 +118,14 @@ public class AntColony
 	 */
 	public void deployAnt(Place place, Ant ant)
 	{
+		if (place.getWater() && !ant.canSwim)
+		{
+			paused = true;
+			JOptionPane.showMessageDialog(null, "This ant cannot swim!");
+			paused = false;
+			return;
+		}
+		
 		if(this.food >= ant.getFoodCost() && place.getAnt() == null) // ==Niall== Edit made here, added place.getAnt() == null to make sure food is only taken when the place is empty.
 		{
 			this.food -= ant.getFoodCost();

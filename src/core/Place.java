@@ -1,6 +1,7 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Represents a location in the game
@@ -14,6 +15,7 @@ public class Place
 	private Place entrance; //where you enter this place from
 	private ArrayList<Bee> bees; //bees currently in the place
 	private Ant ant; //ant (singular) currently in the place
+	private boolean waterLogged; // A boolean to check if the place is full of water
 	
 	/**
 	 * Creates a new place with the given name and exit
@@ -27,6 +29,26 @@ public class Place
 		this.entrance = null;
 		this.bees = new ArrayList<Bee>();
 		this.ant = null;
+		waterLogged = GenerateWater();
+		System.out.println(waterLogged);
+	}
+	
+	// Returns a boolean to randomly assign water to different places.
+	private boolean GenerateWater()
+	{
+		int i;
+		
+		i = (int)Math.floor(Math.random()*(100 - 0 + 1));
+		
+		System.out.println(i);
+		
+		if (i >= 80)
+		{
+			return true; // ==Niall= Returns true, so this place will be marked as water logged.
+		}
+		
+		else
+			return false; // ==Niall= Returns false, so this place will not be marked as water logged.
 	}
 	
 	/**
@@ -149,7 +171,7 @@ public class Place
 		}
 		else
 			System.out.println("Already an ant in "+this); //report error
-	} // ==Niall== Something needs to be done about this, ant is not placed, but the food cost is taken
+	}
 
 	/**
 	 * Adds a bee to the place
@@ -194,5 +216,15 @@ public class Place
 	public String toString()
 	{
 		return name;
-	}	
+	}
+	
+	public boolean getWater()
+	{
+		return waterLogged;
+	}
+	
+	public void setWater(boolean set)
+	{
+		waterLogged = set;
+	}
 }

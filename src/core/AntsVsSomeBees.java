@@ -23,7 +23,7 @@ public class AntsVsSomeBees
 		//Hive hive = Hive.makeTestHive(); //specify the attackers (the hive)
 		Hive hive = Hive.makeFullHive();
 		//Hive hive = Hive.makeInsaneHive();
-		new AntGame(colony,hive); //launch the game
+		new AntGame(colony, hive); //launch the game
 		themeSound("themesong.wav"); //theme music for the game ==> David Afolabi
 
 
