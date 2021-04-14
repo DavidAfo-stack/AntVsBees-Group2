@@ -30,6 +30,7 @@ import org.hamcrest.core.IsInstanceOf;
 
 import ants.HungryAnt;
 import ants.ThrowerAnt;
+import ants.ScubaThrowerAnt;
 
 /**
  * A class that controls the graphical game of Ants vs. Some-Bees. Game simulation system and GUI interaction are intermixed.
@@ -249,7 +250,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 			if(pos.framesLeft > 0)
 				pos.step();
 		}
-		Iterator<AnimPosition> iter = leaves.iterator(); //apply animations ot all the leaves
+		Iterator<AnimPosition> iter = leaves.iterator(); //apply animations to all the leaves
 		while(iter.hasNext()) { //iterator so we can remove when finished
 			AnimPosition leaf = iter.next();
 			if(leaf.framesLeft > 0)

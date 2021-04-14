@@ -14,8 +14,10 @@ public class Place
 	private Place exit; //where you leave this place to
 	private Place entrance; //where you enter this place from
 	private ArrayList<Bee> bees; //bees currently in the place
+	private ArrayList<Ant> ants;
 	private Ant ant; //ant (singular) currently in the place
 	private boolean waterLogged; // A boolean to check if the place is full of water
+	public boolean guarded = false;
 	
 	/**
 	 * Creates a new place with the given name and exit
@@ -28,6 +30,7 @@ public class Place
 		this.exit = exit;
 		this.entrance = null;
 		this.bees = new ArrayList<Bee>();
+		this.ants = new ArrayList<Ant>();
 		this.ant = null;
 		waterLogged = GenerateWater();
 		System.out.println(waterLogged);
@@ -66,7 +69,22 @@ public class Place
 	 */
 	public Ant getAnt()
 	{
-		return ant;
+		if (ants.isEmpty())
+			return ant;
+		else
+			return priorityAnt();
+	}
+	
+	public Ant priorityAnt()
+	{
+		for (Ant a : ants)
+		{
+			if (a.priority)
+			{
+				return a;
+			}
+		}
+		return ants.get(0);
 	}
 	
 	/**
@@ -160,15 +178,36 @@ public class Place
 	 */
 	public void addInsect(Ant ant)
 	{
-		if(this.ant == null)
+		System.out.println("Ant arraylist " + ants);
+		
+		if (!ants.isEmpty())
 		{
-			this.ant = ant;
-			ant.setPlace(this);
+			System.out.println("Ants is not empty");
+			if (ant.overlays && !guarded)
+			{
+				System.out.println("Adding overlay ant: " + ant);
+				ants.add(ant);
+				ant.setPlace(this);
+				guarded = true;
+				return;
+			}
+			else
+				return;
 		}
-		else
-			System.out.println("Already an ant in "+this); //report error
+		System.out.println("Adding ant: " + ant);
+		// this.ant = ant;
+		ants.add(ant);
+		ant.setPlace(this);
+		
+//		if(override/*this.ant == null*/)
+//		{
+//			this.ant = ant;
+//			ant.setPlace(this);
+//		}
+//		else
+//			System.out.println("Already an ant in "+this); //report error
 	}
-
+	
 	/**
 	 * Adds a bee to the place
 	 * @param bee The bee to add to the place.
@@ -185,10 +224,20 @@ public class Place
 	 */
 	public void removeInsect(Ant ant)
 	{
-		if(this.ant == ant)
+		if (ants.contains(ant)) 
 		{
-			this.ant = null;
+			ants.remove(ant);
 			ant.setPlace(null);
+		}
+		
+//		if(this.ant == ant)
+//		{
+//			this.ant = null;
+//			ant.setPlace(null);
+//		}
+		if (ant.overlays)
+		{
+			guarded = false;
 		}
 		else
 			System.out.println(ant + " is not in "+this);
