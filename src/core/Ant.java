@@ -10,6 +10,8 @@ public abstract class Ant extends Insect
 	protected int foodCost; //the amount of food needed to make this ant
 	protected boolean blockBeePath; //An attribute to track if ant blocks bee==> Implemented by David.
 	protected boolean canSwim; // ==Niall== Determines if the ant can be placed in water filled places;
+	boolean priority;
+	boolean overlays;
 	
 	/**
 	 * Creates a new Ant, with a food cost of 0.
@@ -29,6 +31,19 @@ public abstract class Ant extends Insect
 		this.foodCost = food;
 		this.blockBeePath =  true; // set value to true to show that ant blocks bee
 		this.canSwim = true; // If this constructor is called, then it is either the scuba or queen ant, and therefore can swim
+	}
+	
+	/*
+	 * This constructor is for the creation of the bodyguard ant.
+	 */
+	public Ant(int armor, int food, boolean swim, boolean priority, boolean overlays)
+	{
+		super(armor, null);
+		this.foodCost = food;
+		this.blockBeePath =  true; // set value to true to show that ant blocks bee
+		this.canSwim = swim; // If this constructor is called, then it is either the scuba or queen ant, and therefore can swim
+		this.priority = priority; // Sets if the ant is a priority target.
+		this.overlays = overlays;
 	}
 	
 	/**

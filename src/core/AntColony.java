@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import ants.BodyguardAnt;
+
 /**
  * An entire colony of ants and their tunnels.
  * @author Joel
@@ -126,13 +128,36 @@ public class AntColony
 			return;
 		}
 		
-		if(this.food >= ant.getFoodCost() && place.getAnt() == null) // ==Niall== Edit made here, added place.getAnt() == null to make sure food is only taken when the place is empty.
+		if(this.food >= ant.getFoodCost()/* && place.getAnt() == null*/) // ==Niall== Edit made here, added place.getAnt() == null to make sure food is only taken when the place is empty.
 		{
-			this.food -= ant.getFoodCost();
-			place.addInsect(ant);
+			if (place.getAnt() != null) // If there is an ant in the place
+			{
+				if (ant.overlays) // If the ant you are trying to place is an overlay ant
+				{
+					if (!place.guarded) // If the place is not being guarded
+					{
+						System.out.println("Place is not being guarded and a bodyguard ant has been created");
+						place.guarded = true;
+						this.food -= ant.getFoodCost();
+						place.addInsect(ant);
+						return;
+					}
+				}
+//				paused = true;
+//				JOptionPane.showMessageDialog(null, "There is already an ant here");
+//				paused = false;
+			}
+			if (place.getAnt() == null)
+			{
+				if (ant.overlays)
+					place.guarded = true;
+				this.food -= ant.getFoodCost();
+				place.addInsect(ant);
+				return;
+			}
 		}
-		else // ==Niall== Added this else statement to ensure that the correct error is displayed.
-			if (place.getAnt() != null) // ==Niall== These JOption panes should be paired with a future pause system to pause the game when they are showing.
+		// ==Niall== Added this else statement to ensure that the correct error is displayed.
+		if (place.getAnt() != null) // ==Niall== These JOption panes should be paired with a future pause system to pause the game when they are showing.
 			{
 				paused = true;
 				JOptionPane.showMessageDialog(null, "There is already an ant here");
@@ -155,7 +180,13 @@ public class AntColony
 	public void removeAnt(Place place)
 	{
 		if(place.getAnt() != null)
+		{
+			if (place.getAnt() instanceof BodyguardAnt)
+			{
+				place.guarded = false;
+			}
 			place.removeInsect(place.getAnt());
+		}
 	}
 	
 	/**

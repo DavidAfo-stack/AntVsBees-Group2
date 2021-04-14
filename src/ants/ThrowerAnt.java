@@ -19,8 +19,16 @@ public class ThrowerAnt extends Ant
 	 */
 	public ThrowerAnt()
 	{
-		super(1, 4, true);
+		super(1, 4);
 		this.damage = 1;
+	}
+	/*
+	 * ==Niall== Added this extra constructor so that the scuba ant could be placeable in the water spots
+	 * but also so that it could use the leaf throwing animation of the thrower ant.
+	 */
+	public ThrowerAnt(int armor, int food, boolean canSwim)
+	{
+		super(armor, food, canSwim);
 	}
 	
 	/**
@@ -34,10 +42,6 @@ public class ThrowerAnt extends Ant
 	
 	public void action(AntColony colony)
 	{
-		ArrayList<Bee> bees = place.getAllBees(0, 8);
-		
-		System.out.println(bees);
-		
 		Bee target = getTarget();
 		if(target != null)
 		{
