@@ -23,11 +23,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
 
+import ants.FireAnt;
 import org.hamcrest.core.IsInstanceOf;
 
 import ants.HungryAnt;
@@ -126,7 +124,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 				this.frame = 0;
 				this.turn = 0;
 				this.clock = new Timer(1000/FPS, this);
-						
+
 				//member ant property storage variables
 				ANT_TYPES = new ArrayList<String>();
 				ANT_IMAGES = new HashMap<String,Image>();
@@ -144,7 +142,6 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 				colonyRects = new HashMap<Place, Rectangle>();
 				initializeAntSelector();
 				initializeColony();
-				
 				//adding interaction
 				this.addMouseListener(this);
 				
@@ -627,7 +624,6 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 			Rectangle clickable = new Rectangle(pos.x, pos.y, width, height);
 			this.colonyAreas.put(clickable, place);
 			this.colonyRects.put(place, clickable);
-			
 			pos.translate(width+PLACE_MARGIN, 0); //shift rectangle position for next run
 		}
 
