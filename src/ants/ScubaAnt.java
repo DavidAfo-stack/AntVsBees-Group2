@@ -1,4 +1,6 @@
-package core;
+package ants;
+
+import core.Ant;
 
 public abstract class ScubaAnt extends Ant
 {

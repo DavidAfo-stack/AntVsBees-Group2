@@ -1,6 +1,5 @@
 package ants;
 
-import core.ScubaAnt;
 import core.AntColony;
 import core.Bee;
 

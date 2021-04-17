@@ -423,7 +423,6 @@ public class PauseScreen
 	public void RestartGame()
 	{
 		restart = true;
-		
 		pauseScreen.dispose();
 	}
 	
