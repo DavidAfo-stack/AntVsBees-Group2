@@ -16,6 +16,7 @@ public class HarvesterAnt extends Ant
 	public HarvesterAnt()
 	{
 		super(1, 2);
+		System.out.println("Is this ant a priority? " + priority);
 	}
 
 	public void action(AntColony colony)

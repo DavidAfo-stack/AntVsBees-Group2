@@ -299,7 +299,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		{
 			if(rect.contains(pt)) {
 				if(selectedAnt == null){
-					colony.removeAnt(colonyAreas.get(rect));
+					colony.removeAnt(colonyAreas.get(rect), false);
 					return; //stop searching
 				}
 				else
@@ -693,7 +693,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		places = colony.getPlaces();
 		for(Place p : places)
 		{
-			colony.removeAnt(p);
+			colony.removeAnt(p, true);
 		}
 		ArrayList<Bee> bees;
 		bees = colony.getAllBees();

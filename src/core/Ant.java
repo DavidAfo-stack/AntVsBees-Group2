@@ -10,8 +10,11 @@ public abstract class Ant extends Insect
 	protected int foodCost; //the amount of food needed to make this ant
 	protected boolean blockBeePath; //An attribute to track if ant blocks bee==> Implemented by David.
 	protected boolean canSwim; // ==Niall== Determines if the ant can be placed in water filled places;
-	boolean priority;
-	boolean overlays;
+	protected boolean priority = false;
+	boolean overlays = false;
+	public boolean unique;
+	public boolean buff = false;
+	protected int defaultDamage; // ==Niall== A way of keeping track of the ant's default damage while being able to modify it in code.
 	
 	/**
 	 * Creates a new Ant, with a food cost of 0.
