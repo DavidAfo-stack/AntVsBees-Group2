@@ -43,7 +43,7 @@ public class Place
 		
 		i = (int)Math.floor(Math.random()*(100 - 0 + 1));
 		
-		System.out.println(i);
+		// System.out.println(i);
 		
 		if (i >= 80)
 		{

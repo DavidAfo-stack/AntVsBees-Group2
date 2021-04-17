@@ -15,8 +15,10 @@ public class HungryAnt extends Ant {
     private int turns = 0; // track the number of turns
 
     // class constructor for Hungry Ant
-    public HungryAnt() {
+    public HungryAnt() 
+    {
         super(1, 4);
+        System.out.println("Is this ant a priority? " + priority);
     }
 
     /**

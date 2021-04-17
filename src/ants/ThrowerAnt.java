@@ -20,8 +20,11 @@ public class ThrowerAnt extends Ant
 	public ThrowerAnt()
 	{
 		super(1, 4);
-		this.damage = 1;
+		defaultDamage = 1;
+        damage = defaultDamage;
+        System.out.println("Is this ant a priority? " + priority);
 	}
+	
 	/*
 	 * ==Niall== Added this extra constructor so that the scuba ant could be placeable in the water spots
 	 * but also so that it could use the leaf throwing animation of the thrower ant.
@@ -42,6 +45,13 @@ public class ThrowerAnt extends Ant
 	
 	public void action(AntColony colony)
 	{
+		if (buff)
+    	{
+			damage = defaultDamage * 2;
+    	}
+		else
+			damage = defaultDamage;
+		System.out.println("Ant: " + this + " damage is: " + damage);
 		Bee target = getTarget();
 		if(target != null)
 		{

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import ants.BodyguardAnt;
+import ants.QueenAnt;
 
 /**
  * An entire colony of ants and their tunnels.
@@ -21,6 +22,7 @@ public class AntColony
 	public ArrayList<Place> places; //the places in the colony
 	private ArrayList<Place> beeEntrances; //places which bees can enter (the starts of the tunnels)
 	public boolean paused; // ==Niall== True if the game is paused
+	private boolean queenExists; // ==Niall== To check if the Queen exists, so that more than one cannot be placed.
 	
 	/**
 	 * Creates a new ant colony with the given layout.
@@ -109,6 +111,9 @@ public class AntColony
 	 */
 	public boolean queenHasBees()
 	{
+		if (queenPlace.guarded)
+			return false;
+		
 		return this.queenPlace.getBees().length  > 0;
 	}
 	
@@ -119,13 +124,28 @@ public class AntColony
 	 * @param ant The ant to place
 	 */
 	public void deployAnt(Place place, Ant ant)
-	{
+	{	
 		if (place.getWater() && !ant.canSwim)
 		{
 			paused = true;
 			JOptionPane.showMessageDialog(null, "This ant cannot swim!");
 			paused = false;
 			return;
+		}
+		
+		if (ant instanceof QueenAnt)
+			{
+			if (QueenPlacer(place, ant))
+			{
+				//continues, else it stops anything else from running
+			}
+			else
+			{
+				paused = true;
+				JOptionPane.showMessageDialog(null, "A Queen ant has already been placed in the colony!");
+				paused = false;
+				return;
+			}
 		}
 		
 		if(this.food >= ant.getFoodCost()/* && place.getAnt() == null*/) // ==Niall== Edit made here, added place.getAnt() == null to make sure food is only taken when the place is empty.
@@ -136,10 +156,9 @@ public class AntColony
 				{
 					if (!place.guarded) // If the place is not being guarded
 					{
-						System.out.println("Place is not being guarded and a bodyguard ant has been created");
-						place.guarded = true;
 						this.food -= ant.getFoodCost();
 						place.addInsect(ant);
+						place.guarded = true;
 						return;
 					}
 				}
@@ -173,14 +192,36 @@ public class AntColony
 		}
 	}
 
+	boolean QueenPlacer(Place place, Ant ant)
+	{
+		if (!queenExists)
+		{
+			System.out.println("Deploying queen");
+			
+			queenPlace = place;
+			queenExists = true;
+			return true;
+		}
+		else
+			return false;
+	}
+	
 	/**
 	 * Removes the ant inhabiting the given Place
 	 * @param place Where to remove the ant from
 	 */
-	public void removeAnt(Place place)
+	public void removeAnt(Place place, boolean gameOver)
 	{
 		if(place.getAnt() != null)
 		{
+			if (place.getAnt() instanceof QueenAnt && !gameOver)
+			{
+				paused = true;
+				JOptionPane.showMessageDialog(null, "You cannot remove the queen ant!");
+				paused = false;
+				return;
+			}
+			
 			if (place.getAnt() instanceof BodyguardAnt)
 			{
 				place.guarded = false;

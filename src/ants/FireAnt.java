@@ -11,9 +11,12 @@ public class FireAnt extends Ant {
      */
     protected int damage;
 
-    public FireAnt() {
+    public FireAnt() 
+    {
         super(1, 4);
-        this.damage = 3;
+        defaultDamage = 3;
+        damage = defaultDamage;
+        System.out.println("Is this ant a priority? " + priority);
     }
      /**
      * this method overrides the reduceArmor method in the ant class
@@ -23,7 +26,12 @@ public class FireAnt extends Ant {
      * @param amount The amount to decrease the armor by
      */
     @Override
-    public void reduceArmor(int amount) {
+    public void reduceArmor(int amount) 
+    {
+    	if (buff)
+    	{
+    		damage = defaultDamage * 2;
+    	}
             ArrayList<Bee> beesInPlace = getPlace().getAllBees(0,0);
             for (Bee bees : beesInPlace)
             {

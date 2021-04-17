@@ -27,6 +27,8 @@ public class Bee extends Insect {
 	 */
 	public void sting(Ant ant) 
 	{
+		System.out.println("This bee's target is" + ant);
+		
 		ant.reduceArmor(DAMAGE);
 		
 		System.out.println("Damaged " + ant);

@@ -11,13 +11,15 @@ public class NinjaAnt extends Ant {
      * Author: David Afolabi
      * 2021
      */
-  protected int damage;
+	protected int damage;
 
     //class constructor for Ninja ant
     public NinjaAnt() {
         super(1, 6);
         this.blockBeePath = false; // does not block the bee in its place
-        this.damage = 1; //damage value of Ninja ant set by default to 1
+        defaultDamage = 1; //damage value of Ninja ant set by default to 1
+        damage = defaultDamage; 
+        System.out.println("Is this ant a priority? " + priority);
     }
 
     /**
@@ -26,7 +28,14 @@ public class NinjaAnt extends Ant {
      * @param colony The colony in which this action takes place (to support wide-spread effects)
      */
     @Override
-    public void action(AntColony colony) {
+    public void action(AntColony colony) 
+    {
+    	if (buff)
+    	{
+    		damage = defaultDamage * 2;
+    	}
+    	else
+			damage = defaultDamage;
        Bee[] bees = this.place.getBees();
             for(Bee bee: bees){
                  place.getClosestBee(0,3);
