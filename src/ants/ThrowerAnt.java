@@ -58,4 +58,12 @@ public class ThrowerAnt extends Ant
 			target.reduceArmor(this.damage);
 		}
 	}
+
+	public int getDamageValue(){
+		return this.damage;
+	}
+
+	public Boolean getBlockBee(){
+		return this.blockBeePath;
+	}
 }

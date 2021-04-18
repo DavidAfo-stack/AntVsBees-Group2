@@ -4,8 +4,6 @@ import core.Ant;
 import core.AntColony;
 import core.Bee;
 
-import java.util.ArrayList;
-
 public class NinjaAnt extends Ant {
     /**
      * Author: David Afolabi
@@ -42,5 +40,13 @@ public class NinjaAnt extends Ant {
                  bee.reduceArmor(this.damage);
 
         }
+    }
+
+    public int getDamageValue(){
+        return this.damage;
+    }
+
+    public Boolean getBlockBeeAttribute(){
+        return this.blockBeePath;
     }
 }

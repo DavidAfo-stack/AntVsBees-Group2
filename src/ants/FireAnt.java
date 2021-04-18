@@ -51,4 +51,8 @@ public class FireAnt extends Ant {
     public void action(AntColony colony) {
                 return;
     }
+
+    public int getDamageValue(){
+        return this.damage;
+    }
 }
