@@ -12,8 +12,8 @@ public abstract class Ant extends Insect
 	protected boolean canSwim; // ==Niall== Determines if the ant can be placed in water filled places;
 	protected boolean priority = false;
 	boolean overlays = false;
-	public boolean unique;
-	public boolean buff = false;
+	public boolean unique; // ==Niall== Sets the ant to be unique and therefore a duplicate cannot be created
+	public boolean buff = false; // ==Niall== A check for whether or not the ant's damage is buffed by the queen ant.
 	protected int defaultDamage; // ==Niall== A way of keeping track of the ant's default damage while being able to modify it in code.
 	
 	/**
