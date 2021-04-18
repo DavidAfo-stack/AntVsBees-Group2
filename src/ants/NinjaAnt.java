@@ -30,12 +30,12 @@ public class NinjaAnt extends Ant {
     @Override
     public void action(AntColony colony) 
     {
-    	if (buff)
+    	if (buff) // Checks if the ant's damage should be increased
     	{
-    		damage = defaultDamage * 2;
+			damage = defaultDamage * 2;
     	}
-    	else
-			damage = defaultDamage;
+		else
+			damage = defaultDamage; // Sets the ant's damage to default otherwise
        Bee[] bees = this.place.getBees();
             for(Bee bee: bees){
                  place.getClosestBee(0,3);

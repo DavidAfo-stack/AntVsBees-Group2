@@ -20,12 +20,12 @@ public class ScubaThrowerAnt extends ThrowerAnt
 	
 	public void action(AntColony colony)
 	{
-		if (buff)
+		if (buff) // Checks if the ant's damage should be increased
     	{
 			damage = defaultDamage * 2;
     	}
 		else
-			damage = defaultDamage;
+			damage = defaultDamage; // Sets the ant's damage to default otherwise
 		
 		System.out.println("Ant: " + this + " damage is: " + damage);
 		
