@@ -28,10 +28,13 @@ public class FireAnt extends Ant {
     @Override
     public void reduceArmor(int amount) 
     {
-    	if (buff)
+    	if (buff) // Checks if the ant's damage should be increased
     	{
-    		damage = defaultDamage * 2;
+			damage = defaultDamage * 2;
     	}
+		else
+			damage = defaultDamage; // Sets the ant's damage to default otherwise
+    	
             ArrayList<Bee> beesInPlace = getPlace().getAllBees(0,0);
             for (Bee bees : beesInPlace)
             {
