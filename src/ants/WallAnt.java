@@ -1,5 +1,6 @@
 package ants;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import core.Ant;
 import core.AntColony;
 import core.Bee;
@@ -25,5 +26,9 @@ public class WallAnt extends Ant {
     @Override
     public void action(AntColony colony) {
         return; //do nothing
+    }
+
+    public Boolean getBlockBeeAttribute(){
+        return this.blockBeePath;
     }
 }
