@@ -10,7 +10,6 @@ public class ScubaThrowerAnt extends ThrowerAnt
 		super(1, 5, true);
 		defaultDamage = 1;
         damage = defaultDamage;
-        System.out.println("Is this ant a priority? " + priority);
 	}
 
 	public Bee getTarget()

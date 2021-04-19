@@ -19,7 +19,6 @@ public class HungryAnt extends Ant {
     public HungryAnt() 
     {
         super(1, 4);
-        System.out.println("Is this ant a priority? " + priority);
     }
 
     /**

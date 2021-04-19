@@ -9,10 +9,9 @@ public class QueenAnt extends ThrowerAnt
 	{
 		super(1, 5, true);
 		unique = true;
-		System.out.println("Is this ant a priority? " + priority);
 	}
 	
-	private void SetBuffs()
+	public void SetBuffs()
 	{
 		if (place.getEntrance() != null)
 		{

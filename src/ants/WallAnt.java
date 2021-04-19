@@ -16,7 +16,6 @@ public class WallAnt extends Ant {
      */
     public WallAnt() {
         super(4, 4); // armor and food added to the wall ant
-        System.out.println("Is this ant a priority? " + priority);
     }
 
     /**
