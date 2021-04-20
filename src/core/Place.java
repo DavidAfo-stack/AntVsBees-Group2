@@ -144,6 +144,11 @@ public class Place
 	{
 		return name;
 	}
+
+	public void setExit(Place exit)
+	{
+		this.exit = exit;
+	}
 	
 	/**
 	 * Returns the exit of the place
@@ -179,6 +184,12 @@ public class Place
 	public void addInsect(Ant ant)
 	{
 		System.out.println("Ant arraylist " + ants);
+		
+		if (!ant.canSwim && waterLogged)
+		{
+			System.out.println("this ant cannot swim");
+			return;
+		}
 		
 		if (!ants.isEmpty())
 		{

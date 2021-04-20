@@ -16,7 +16,6 @@ public class FireAnt extends Ant {
         super(1, 4);
         defaultDamage = 3;
         damage = defaultDamage;
-        System.out.println("Is this ant a priority? " + priority);
     }
      /**
      * this method overrides the reduceArmor method in the ant class

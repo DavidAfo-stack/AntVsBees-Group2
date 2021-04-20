@@ -17,7 +17,6 @@ public class NinjaAnt extends Ant {
         this.blockBeePath = false; // does not block the bee in its place
         defaultDamage = 1; //damage value of Ninja ant set by default to 1
         damage = defaultDamage; 
-        System.out.println("Is this ant a priority? " + priority);
     }
 
     /**

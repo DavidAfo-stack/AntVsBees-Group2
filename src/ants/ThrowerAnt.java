@@ -22,7 +22,6 @@ public class ThrowerAnt extends Ant
 		super(1, 4);
 		defaultDamage = 1;
         damage = defaultDamage;
-        System.out.println("Is this ant a priority? " + priority);
 	}
 	
 	/*

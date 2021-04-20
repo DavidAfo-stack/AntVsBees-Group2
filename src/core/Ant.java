@@ -46,6 +46,8 @@ public abstract class Ant extends Insect
 		this.blockBeePath =  true; // set value to true to show that ant blocks bee
 		this.canSwim = swim; // If this constructor is called, then it is either the scuba or queen ant, and therefore can swim
 		this.priority = priority; // Sets if the ant is a priority target.
+		System.out.println("making overlays true");
+		System.out.println(overlays);
 		this.overlays = overlays;
 	}
 	
