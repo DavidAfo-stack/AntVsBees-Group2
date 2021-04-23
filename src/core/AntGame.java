@@ -398,8 +398,11 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 			
 			Ant ant = place.getAnt();
 			if(ant != null){ //draw the ant if we have one
-				Image img = ANT_IMAGES.get(ant.getClass().getName());
+				for (Ant a : place.getAnts())
+				{
+				Image img = ANT_IMAGES.get(a.getClass().getName());
 				g2d.drawImage(img, rect.x+PLACE_PADDING.width, rect.y+PLACE_PADDING.height, null);
+				}
 			}
 			
 		}
