@@ -240,7 +240,13 @@ public class AntColony
 		for(Place p : places)
 		{
 			if(p.getAnt() != null)
-				ants.add(p.getAnt());
+			{
+				for (Ant ant : p.getAnts())
+				{
+					ants.add(ant); // Altered this so that it goes through the arraylist in each place and checks for multiple ants.
+					// Allows for ants to function correctly when overlaid by a bodyguard ant.
+				}
+			}
 		}
 		return ants;
 	}
