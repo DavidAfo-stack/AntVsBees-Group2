@@ -15,7 +15,7 @@ import ants.QueenAnt;
 public class AntColony
 {
 	public static final String QUEEN_NAME = "AntQueen"; //name of the Queen's place
-	public static final int MAX_TUNNEL_LENGTH = 8;
+	public static final int MAX_TUNNEL_LENGTH = 8; // ==Niall== I tried changing this, it is 8 for a reason.
 	
 	private int food; //amount of food available
 	private Place queenPlace; //where the queen is
@@ -23,6 +23,7 @@ public class AntColony
 	private ArrayList<Place> beeEntrances; //places which bees can enter (the starts of the tunnels)
 	public boolean paused; // ==Niall== True if the game is paused
 	private boolean queenExists; // ==Niall== To check if the Queen exists, so that more than one cannot be placed.
+	private int speed; //==Niall== A method of changing the speed of the bees for the difficulty setting.
 	
 	/**
 	 * Creates a new ant colony with the given layout.
@@ -31,11 +32,14 @@ public class AntColony
 	 * @param moatFrequency The frequency of which moats (water areas) appear. 0 means that there are no moats
 	 * @param startingFood The starting food for this colony.
 	 */
-	public AntColony(int numTunnels, int tunnelLength, int moatFrequency, int startingFood)
+	
+//	public AntColony(int numTunnels, int tunnelLength, int moatFrequency, int startingFood) I have kept this just in case any issues arise with the new function
+	
+	public AntColony(int numTunnels, int tunnelLength, int speed, int startingFood)
 	{
 		//simulation values
-		this.food = startingFood;		
-		
+		this.food = startingFood;
+		this.speed = speed;
 		//init variables
 		places = new ArrayList<Place>();
 		beeEntrances = new ArrayList<Place>();
@@ -274,5 +278,10 @@ public class AntColony
 	public boolean getPaused()
 	{
 		return paused;
+	}
+
+	public int getSpeed() 
+	{
+		return speed;
 	}
 }
