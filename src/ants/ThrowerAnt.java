@@ -32,6 +32,11 @@ public class ThrowerAnt extends Ant
 	{
 		super(armor, food, canSwim);
 	}
+
+	public ThrowerAnt(int armor, int food)
+	{
+		super(armor, food);
+	}
 	
 	/**
 	 * Returns a target for this ant

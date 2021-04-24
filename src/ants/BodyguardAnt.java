@@ -17,9 +17,8 @@ public class BodyguardAnt extends Ant
 	@Override
 	public void action(AntColony colony) 
 	{
-		
-		
 		// Bodyguard ant does nothing but take damage.
+		return;
 	}
 	
 }

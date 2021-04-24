@@ -67,4 +67,5 @@ public abstract class Ant extends Insect
 	{
 		this.place.removeInsect(this);
 	}
+
 }
