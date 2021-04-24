@@ -51,7 +51,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	
 	//game clock & speed
 	public static final int FPS = 30; //target frames per second
-	public static final int TURN_SECONDS = 3; //seconds per turn
+	public static int TURN_SECONDS = 0; //seconds per turn ==Niall== This is now altered at the start when the game begins depending on the difficulty.
 	public static final double LEAF_SPEED = .3; //in seconds
 	private int turn; //current game turn
 	private int frame; //time elapsed since last turn
@@ -124,6 +124,8 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 				this.frame = 0;
 				this.turn = 0;
 				this.clock = new Timer(1000/FPS, this);
+				
+				TURN_SECONDS = colony.getSpeed();
 
 				//member ant property storage variables
 				ANT_TYPES = new ArrayList<String>();
@@ -396,8 +398,11 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 			
 			Ant ant = place.getAnt();
 			if(ant != null){ //draw the ant if we have one
-				Image img = ANT_IMAGES.get(ant.getClass().getName());
+				for (Ant a : place.getAnts())
+				{
+				Image img = ANT_IMAGES.get(a.getClass().getName());
 				g2d.drawImage(img, rect.x+PLACE_PADDING.width, rect.y+PLACE_PADDING.height, null);
+				}
 			}
 			
 		}
