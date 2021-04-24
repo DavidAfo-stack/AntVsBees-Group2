@@ -1,5 +1,7 @@
 package core;
 
+import ants.BodyguardAnt;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,7 +10,7 @@ import java.util.Random;
  * @author Joel
  * @version Fall 2014
  */
-public class Place
+public class Place implements PriorityAct
 {
 	private String name; //a name we can use for debugging
 	private Place exit; //where you leave this place to
@@ -80,9 +82,9 @@ public class Place
 		else
 			return priorityAnt(); // This isn't good, prevents ants under bodyguard ant from acting, this needs to return all ants.
 	}
-	
-	public Ant priorityAnt()
-	{
+
+	@Override
+	public Ant priorityAnt() {
 		for (Ant a : ants)
 		{
 			if (a.priority)
@@ -92,6 +94,7 @@ public class Place
 		}
 		return ants.get(0);
 	}
+
 	
 	/**
 	 * Returns an array of the place's bees
@@ -289,4 +292,5 @@ public class Place
 	{
 		waterLogged = set;
 	}
+
 }

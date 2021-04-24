@@ -47,7 +47,7 @@ public class Hive extends Place
 			b.moveTo(exits[randExit]); //move b to a random exit from the hive (entrance to the colony)
 		}
 		return wave; //return who invaded
-	}	
+	}
 
 	/**
 	 * Adds a wave of attacking bees to this hive

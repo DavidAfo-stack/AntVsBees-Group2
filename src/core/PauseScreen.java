@@ -19,16 +19,15 @@ public class PauseScreen
 	
 	JFrame pauseScreen;
 	JPanel pausePanel;
-	JFrame gameInfoScreen;
+	JFrame gameInfoScreen  = new JFrame("Game Info"); //David-> For the game instruction
 	JButton continueButton = new JButton("Continue");
 	JButton restartButton = new JButton("Restart");
-	JButton gameInfoButton = new JButton("Game Guide");// initialize button for game description
+	JButton gameInfoButton = new JButton("Game Guide");// David-> initialize button for game description
 	JButton quitButton = new JButton("Quit");
-	JButton generalGuideButton, harvesterAntButton, throwerAntButton, hungryAntButton, fireAntButton, ninjaAntButton, wallAntButton, scubaAntButton, queenAntButton, bodyGuardAntButton; //Initialize buttons menu guide
-	
-	
+	JButton generalGuideButton, harvesterAntButton, throwerAntButton, hungryAntButton, fireAntButton, ninjaAntButton, wallAntButton, scubaAntButton, queenAntButton, bodyGuardAntButton; //David->Initialize buttons menu guide
+
 	public static final Dimension FRAME_SIZE = new Dimension(300,300);
-	public static final Dimension GUIDESCREEN_SIZE = new Dimension(300, 500);
+	public static final Dimension GUIDESCREEN_SIZE = new Dimension(300, 600);
 	private boolean open = false;
 	public boolean restart = false;
 	public boolean exists = false;
@@ -60,23 +59,31 @@ public class PauseScreen
 		MainPauseLoop();
 
 		/**
-		 * set up the game guide button == David Afolabi
-		 * this button opens up a panel that includes different buttons
-		 * displaying ants abilities
+		 * This ensures that the gameInfoScreen is not duplicated anytime the pause button is clicked
 		 */
+		gameInfoScreen.dispose();
+		  GuideBtnSet();
+	}
+
+	/**
+	 * set up the game guide button == David Afolabi
+	 * this button opens up a panel that includes different buttons
+	 * displaying ants abilities
+	 */
+	public void GuideBtnSet(){
 		gameInfoButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(e.getSource() == gameInfoButton) {
+					gameInfoScreen.setVisible(true);
+					gameInfoScreen.setSize(GUIDESCREEN_SIZE);
+					gameInfoScreen.setAlwaysOnTop(true);
+					gameInfoScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Makes sure that the window is closed on exit
+					gameInfoScreen.setLayout(null);
+					gameInfoScreen.setResizable(false);
+					setGameGuideButtons();
+				}
 
-				gameInfoScreen = new JFrame();
-				gameInfoScreen.setTitle("Game Info");
-				gameInfoScreen.setVisible(true);
-				gameInfoScreen.setSize(GUIDESCREEN_SIZE);
-				gameInfoScreen.setAlwaysOnTop(true);
-				gameInfoScreen.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Makes sure that the window is closed on exit
-				gameInfoScreen.setLayout(null);
-				gameInfoScreen.setResizable(false);
-				setGameGuideButtons();
 				//help guide for harvester ant
 				harvesterAntButton.addActionListener(new ActionListener() {
 					@Override
@@ -258,17 +265,17 @@ public class PauseScreen
 					public void actionPerformed(ActionEvent e) {
 						Runnable run = ()->{
 							String innerContent = "<html><body width='%1s'>"
-												+ "<h1>Game Instruction</h1>"
-												+ "<h2>The game is about protecting the Ants colony from the bees. The bees "
-												+ "have been designed to sting the ant to death but different ants with different abilities were also "
-												+ "designed to protect the colony from the evil bees. Remember, there can be only one true Queen. "
-												+ "If a bee ever enters the place occupied by the queen, then the bees immediately win the game. The "
-												+ "game ends even if the queen is protected by a bodyguard. The bees also win if any bee reaches the "
-												+ "end of a tunnel where the queen normally would reside. The true (first) queen cannot be removed, "
-												+ "that is, it cannot be moved or damaged. Attempts to remove the queen should have no effect."
-												+ "Protect the Ants colony at all cost to win the game. "
-												+ "Enjoy the game! </h2>"
-									  			+ "</body></html>";
+									+ "<h1>Game Instruction</h1>"
+									+ "<h2>The game is about protecting the Ants colony from the bees. The bees "
+									+ "have been designed to sting the ant to death but different ants with different abilities were also "
+									+ "designed to protect the colony from the evil bees. Remember, there can be only one true Queen. "
+									+ "If a bee ever enters the place occupied by the queen, then the bees immediately win the game. The "
+									+ "game ends even if the queen is protected by a bodyguard. The bees also win if any bee reaches the "
+									+ "end of a tunnel where the queen normally would reside. The true (first) queen cannot be removed, "
+									+ "that is, it cannot be moved or damaged. Attempts to remove the queen should have no effect."
+									+ "Protect the Ants colony at all cost to win the game. "
+									+ "Enjoy the game! </h2>"
+									+ "</body></html>";
 
 							//set width of JOption pane
 							int size = 500;
@@ -280,8 +287,9 @@ public class PauseScreen
 				//end of general guide for the game
 			}
 		});
-      // end of guide guide screen
 	}
+
+
 	/**
 	 * set up game guide buttons for different features of the game
 	 * once the button is clicked, the information appears for the feature
