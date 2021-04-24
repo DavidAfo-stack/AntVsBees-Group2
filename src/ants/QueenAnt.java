@@ -1,7 +1,6 @@
 package ants;
 
-import core.AntColony;
-import core.Bee;
+import core.*;
 
 public class QueenAnt extends ThrowerAnt
 {

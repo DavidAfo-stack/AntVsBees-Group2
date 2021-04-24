@@ -73,6 +73,7 @@ public abstract class Insect
 			leavePlace();
 		}
 	}
+
 	
 	/**
 	 * Has the insect move out of its current location. Abstract in case the insect takes action when it leaves

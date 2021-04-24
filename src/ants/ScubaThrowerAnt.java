@@ -4,7 +4,7 @@ import core.AntColony;
 import core.Bee;
 
 public class ScubaThrowerAnt extends ThrowerAnt
-{	
+{
 	public ScubaThrowerAnt() 
 	{
 		super(1, 5, true);
