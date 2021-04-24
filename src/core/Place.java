@@ -67,12 +67,18 @@ public class Place
 	 * Returns the place's ant
 	 * @return the place's ant
 	 */
+	
+	public ArrayList<Ant> getAnts() // This gets all ants in a place in the case that a bodyguard ant is also present.
+	{
+		return ants;
+	}
+	
 	public Ant getAnt()
 	{
 		if (ants.isEmpty())
 			return ant;
 		else
-			return priorityAnt();
+			return priorityAnt(); // This isn't good, prevents ants under bodyguard ant from acting, this needs to return all ants.
 	}
 	
 	public Ant priorityAnt()
