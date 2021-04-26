@@ -32,6 +32,8 @@ public class AntsVsSomeBees
 		setUpMenu();
 		setUpPanel();
 		setUpButtons();
+		mainMenu.revalidate();
+		mainMenu.repaint();
 		
 		while (diff == 0)
 			handleButtons();
@@ -121,6 +123,6 @@ public class AntsVsSomeBees
 		Hive hive = Hive.makeFullHive();
 		//Hive hive = Hive.makeInsaneHive();
 		new AntGame(colony,hive); //launch the game
-		ThemeSong.themeSound("themesong.wav");//theme music for the game ==> David Afolabi
+		//ThemeSong.themeSound("themesong.wav");//theme music for the game ==> David Afolabi
 	}
 }
