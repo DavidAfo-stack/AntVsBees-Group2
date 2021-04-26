@@ -1,6 +1,8 @@
 package core;
 
 import javax.sound.sampled.*;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -24,9 +26,7 @@ public class AntsVsSomeBees
 	public static void launchGame(int tunnels, int length, int speed, int startingFood) throws IOException, UnsupportedAudioFileException, LineUnavailableException
 	{
 //		AntColony colony = new AntColony(3, 8,0, startingFood); //specify the colony [tunnels, length, moats, food]
-		
-		
-		
+
 		AntColony colony = new AntColony(tunnels, length, speed, startingFood); //specify the colony [tunnels, length, moats, food]
 		//Hive hive = Hive.makeTestHive(); //specify the attackers (the hive)
 		Hive hive = Hive.makeFullHive();

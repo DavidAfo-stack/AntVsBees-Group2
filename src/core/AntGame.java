@@ -73,7 +73,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	private final Image WATER_IMAGE = ImageUtils.loadImage("img/water.gif");
 	
 	//positioning constants
-	public static final Dimension FRAME_SIZE = new Dimension(1024,768);
+	public static final Dimension FRAME_SIZE = new Dimension(1150,768);
 	public static final Dimension ANT_IMAGE_SIZE = new Dimension(66,71); //assumed size; may be greater than actual image size
 	public static final int BEE_IMAGE_WIDTH = 58;
 	public static final Point PANEL_POS = new Point(20,40);

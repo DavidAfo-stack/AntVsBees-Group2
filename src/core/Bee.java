@@ -1,15 +1,15 @@
 package core;
 
-import ants.FireAnt;
-import ants.NinjaAnt;
-import org.junit.Test;
-
 /**
  * Represents a Bee
  * @author YOUR NAME HERE
  */
-public class Bee extends Insect {
+public class Bee extends Insect implements StunSlowInterface {
 	private static final int DAMAGE = 1;
+	int stun_action = 0; // number of stun remaining
+	int slow_action = 0;
+	int turns = 0;
+	int slowCounter = 0;
 
 	/**
 	 * Creates a new bee with the given armor
@@ -77,10 +77,40 @@ public class Bee extends Insect {
 		 * 	modified to check if the armor is greater than zero
 		 * 	and also check if the bee is blocked
 		 * 	this is implemented because the fire ant does a high damage to the bee
+		 *
+		 * David=> I have created a condition to check if the ant should create a slow or stun effect
+		 * as in case of the Stun and Slow thrower ant
  		 */
-		if (this.armor > 0 && this.isBlocked())
-			sting(this.place.getAnt());
-		else if (this.armor > 0)
-			this.moveTo(this.place.getExit());
+		if(stun_action<=0){
+			if(slow_action > 0){
+				slowCounter = (slowCounter+1)%3;
+			}
+			if(slow_action == 0 || slowCounter == 0){
+				turns++;
+				if (this.armor > 0 && this.isBlocked())
+					sting(this.place.getAnt());
+				else if (this.armor > 0)
+					this.moveTo(this.place.getExit());
+			}
+			else if(armor > 0 && turns > 1){
+				moveTo(place.getExit());
+			}
+		}
+		stun_action = stun_action -1;
+		slow_action -= 1;
+	}
+    //David stun action of the stun thrower ant
+	@Override
+	public void stun_effect(int i) {
+		if(this.stun_action<i){
+			this.stun_action = i;
+		}
+	}
+	//slow action of the slow thrower ant
+	@Override
+	public void slow_effect(int i){
+		if(this.slow_action < i) {
+			this.slow_action = i;
+		}
 	}
 }
