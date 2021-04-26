@@ -24,6 +24,7 @@ class ThrowerAntTest {
     @AfterEach
     void tearDown() {
         throwerAnt = null;
+        throwerAntPlace = null;
     }
 
     /**

@@ -8,7 +8,7 @@ public class SlowAnt extends ThrowerAnt{
      * David Afolabi
      */
     public SlowAnt(){
-        super(4,1);
+        super(1,4);
     }
     //get target bee
     public Bee getTarget()

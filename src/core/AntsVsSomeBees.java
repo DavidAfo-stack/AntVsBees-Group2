@@ -10,18 +10,6 @@ import java.io.IOException;
  */
 public class AntsVsSomeBees
 {
-	// The difficulty of this could be altered to change the number of bees spawned 
-	
-	public static JFrame mainMenu;
-	public static JPanel menuPanel;
-	private static JButton diff1;
-	private static JButton diff2;
-	private static JButton diff3;
-	private static JButton close;
-	public static final Dimension FRAME_SIZE = new Dimension(300,300);
-	public static int diff = 0; // 1 for easy, 2 for medium, 3 for hard
-	
-	public static int startingFood = 25; // ==Niall== I just added this so that it could be easily identified and altered.
 	private static MainMenu menu;
 	
 	/*

@@ -9,7 +9,7 @@ public class ShortThrowerAnt extends ThrowerAnt{
      */
     public ShortThrowerAnt()
     {
-        super(1, 6);
+        super(1, 3);
         defaultDamage = 1;
         damage = defaultDamage;
     }
@@ -34,5 +34,4 @@ public class ShortThrowerAnt extends ThrowerAnt{
             target.reduceArmor(this.damage);
         }
     }
-
 }
