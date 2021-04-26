@@ -99,14 +99,14 @@ public class Bee extends Insect implements StunSlowInterface {
 		stun_action = stun_action -1;
 		slow_action -= 1;
 	}
-    //David stun action of the stun thrower ant
+    //David=> stun action of the stun thrower ant
 	@Override
 	public void stun_effect(int i) {
 		if(this.stun_action<i){
 			this.stun_action = i;
 		}
 	}
-	//slow action of the slow thrower ant
+	//David => slow action of the slow thrower ant
 	@Override
 	public void slow_effect(int i){
 		if(this.slow_action < i) {
