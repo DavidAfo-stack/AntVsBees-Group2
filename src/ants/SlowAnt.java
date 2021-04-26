@@ -10,15 +10,15 @@ public class SlowAnt extends ThrowerAnt{
     public SlowAnt(){
         super(4,1);
     }
-
+    //get target bee
     public Bee getTarget()
     {
         return place.getClosestBee(0, 3);
     }
 
     /**
-     * when a bee is attacked
-     * it takes no action for a turn
+     * when a bee is attacked by the slow thrower ant,
+     * it takes no action for 3 turns and experiences a slow effect
      * @param colony
      */
     public void action(AntColony colony){

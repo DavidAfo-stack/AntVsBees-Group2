@@ -2,7 +2,6 @@ package ants;
 
 import core.AntColony;
 import core.Bee;
-import core.StunInterface;
 
 /**
  * David Afolabi
@@ -12,15 +11,15 @@ public class StunAnt extends ThrowerAnt {
     public StunAnt(){
         super(1,6);
     }
-
+    //get target bee
     public Bee getTarget()
     {
         return place.getClosestBee(0, 3);
     }
 
     /**
-     * when a bee is attacked
-     * it takes no action for a turn
+     * when a bee is attacked by the stun ant,
+     *
      * @param colony
      */
     public void action(AntColony colony){
