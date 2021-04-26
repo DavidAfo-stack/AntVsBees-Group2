@@ -1,12 +1,6 @@
 package core;
 
 import javax.sound.sampled.*;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import java.awt.Dimension;
 import java.io.IOException;
 
 /**
@@ -14,6 +8,7 @@ import java.io.IOException;
  */
 public class AntsVsSomeBees
 {
+<<<<<<< HEAD
 	// The difficulty of this could be altered to change the number of bees spawned 
 	
 	public static JFrame mainMenu;
@@ -77,41 +72,19 @@ public class AntsVsSomeBees
 			System.exit(0);
 		}
 	}
+=======
+	private static MainMenu menu;
+>>>>>>> 9b4b108ff81278628a710f9d27d3fdc3b681a388
 	
-	private static void setUpMenu()
-	{
-		mainMenu = new JFrame("Ants vs some Bees Main Menu");
-		mainMenu.setSize(FRAME_SIZE);
-		mainMenu.setResizable(false);
-		mainMenu.setLayout(null);
-		mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainMenu.setVisible(true);
-	}
+	/*
+	 * Values related to the creation of a new instance of the game.
+	 */
 	
-	private static void setUpPanel()
-	{
-		menuPanel = new JPanel();
-		menuPanel.setBounds(80, 80, 100, 150);
-		// menuPanel.setLayout(new GridBagLayout()); // Centres the buttons.
-		// menuPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
-		menuPanel.setVisible(true);
-		mainMenu.add(menuPanel);
-	}
+	public boolean difficultySelected;
 	
-	private static void setUpButtons()
-	{
-		diff1 = new JButton("Easy");
-		diff2 = new JButton("Medium");
-		diff3 = new JButton("Hard");
-		close = new JButton("Quit");
-		
-		menuPanel.add(diff1);
-		menuPanel.add(Box.createVerticalStrut(20));
-		menuPanel.add(diff2);
-		menuPanel.add(Box.createVerticalStrut(20));
-		menuPanel.add(diff3);
-		menuPanel.add(Box.createVerticalStrut(20));
-		menuPanel.add(close);
+	public static void main(String[] args) throws IOException, UnsupportedAudioFileException, LineUnavailableException, ClassNotFoundException 
+	{	
+		menu = new MainMenu(); // Launches the main menu where the game is started.
 	}
 	
 	public static void launchGame(int tunnels, int length, int speed, int startingFood) throws IOException, UnsupportedAudioFileException, LineUnavailableException
@@ -125,4 +98,5 @@ public class AntsVsSomeBees
 		new AntGame(colony,hive); //launch the game
 		ThemeSong.themeSound("themesong.wav");//theme music for the game ==> David Afolabi
 	}
+	
 }
