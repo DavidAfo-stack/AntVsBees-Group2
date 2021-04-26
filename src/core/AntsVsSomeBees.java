@@ -114,7 +114,7 @@ public class AntsVsSomeBees
 		menuPanel.add(close);
 	}
 	
-	private static void launchGame(int tunnels, int length, int speed, int startingFood) throws IOException, UnsupportedAudioFileException, LineUnavailableException
+	public static void launchGame(int tunnels, int length, int speed, int startingFood) throws IOException, UnsupportedAudioFileException, LineUnavailableException
 	{
 //		AntColony colony = new AntColony(3, 8,0, startingFood); //specify the colony [tunnels, length, moats, food]
 
@@ -123,6 +123,6 @@ public class AntsVsSomeBees
 		Hive hive = Hive.makeFullHive();
 		//Hive hive = Hive.makeInsaneHive();
 		new AntGame(colony,hive); //launch the game
-		//ThemeSong.themeSound("themesong.wav");//theme music for the game ==> David Afolabi
+		ThemeSong.themeSound("themesong.wav");//theme music for the game ==> David Afolabi
 	}
 }
