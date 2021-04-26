@@ -97,7 +97,7 @@ public class ProfileCreator
 	{
 		if (createButton.getModel().isPressed())
 		{
-			if (creatorTextField.getText() != null && !creatorTextField.getText().isEmpty() && !creatorTextField.getText().isEmpty())
+			if (creatorTextField.getText() != null && !creatorTextField.getText().isBlank() && !creatorTextField.getText().isEmpty())
 			{
 				playerName = creatorTextField.getText();
 				selector.serializeProfileHandler(createProfile());
