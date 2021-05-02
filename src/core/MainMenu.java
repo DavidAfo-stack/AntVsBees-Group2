@@ -55,6 +55,8 @@ public class MainMenu
 			// mainMenu.revalidate();
 			mainMenu.repaint();
 		}
+		
+		mainMenu.dispose();
 	}
 	
 	private static void handleButtons() throws IOException, UnsupportedAudioFileException, LineUnavailableException, ClassNotFoundException

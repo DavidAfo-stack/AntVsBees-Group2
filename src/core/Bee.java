@@ -10,7 +10,7 @@ public class Bee extends Insect implements StunSlowInterface {
 	int slow_action = 0;
 	int turns = 0;
 	int slowCounter = 0;
-
+	
 	/**
 	 * Creates a new bee with the given armor
 	 *

@@ -17,6 +17,7 @@ public class AntColony
 	public static final String QUEEN_NAME = "AntQueen"; //name of the Queen's place
 	public static final int MAX_TUNNEL_LENGTH = 8; // ==Niall== I tried changing this, it is 8 for a reason.
 	
+	private int startingFood; // So that the starting amount of food can be accessed for restarting the game.
 	private int food; //amount of food available
 	private Place queenPlace; //where the queen is
 	public ArrayList<Place> places; //the places in the colony
@@ -38,6 +39,7 @@ public class AntColony
 	public AntColony(int numTunnels, int tunnelLength, int speed, int startingFood)
 	{
 		//simulation values
+		this.startingFood = startingFood;
 		this.food = startingFood;
 		this.speed = speed;
 		//init variables
@@ -91,6 +93,11 @@ public class AntColony
 		return queenPlace;
 	}
 	
+	public int getStartingFood() 
+	{
+		return startingFood;
+	}
+	
 	/**
 	 * Returns the amount of available food
 	 * @return the amount of available food
@@ -99,6 +106,7 @@ public class AntColony
 	{
 		return food;
 	}
+	
 	
 	/**
 	 * Increases the amount of available food

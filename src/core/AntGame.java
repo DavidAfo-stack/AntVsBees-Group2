@@ -695,11 +695,31 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		System.out.println("Restarting");
 		
 		Place[] places;
-		places = colony.getPlaces();
-		for(Place p : places)
+		
+		ArrayList<Ant> ants;
+		
+		ants = colony.getAllAnts();
+		
+		for (Ant ant : ants)
 		{
-			colony.removeAnt(p, true);
+			ant.reduceArmor(50);
+			
+			System.out.println("Ant Damaged");
 		}
+		
+//		places = colony.getPlaces();
+//		for(Place p : places)
+//		{
+//			for (Ant ant : p.getAnts())
+//			{ // This doesn't work because of iteration stuff
+//				System.out.println(p.getAnts());
+//				
+//				ant.reduceArmor(50);
+//				
+//				System.out.println("Ant Damaged");
+//				System.out.println(p.getAnts());
+//			}
+//		}
 		ArrayList<Bee> bees;
 		bees = colony.getAllBees();
 		for (Bee b : bees)
@@ -710,12 +730,13 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		mainFrame.dispose();
 		mainFrame.removeAll();
 		
-		colony = new AntColony(3, 8, 0, 25);
+		colony.increaseFood((colony.getStartingFood() - colony.getFood()));
+		AntColony newColony = this.colony;
 		hive = Hive.makeFullHive();
 		
 		shouldRun = false;
 		
-		new AntGame(colony, hive);
+		new AntGame(newColony, hive);
 		
 		// startUp(colony, hive);
 		
