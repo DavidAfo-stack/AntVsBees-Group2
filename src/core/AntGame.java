@@ -694,28 +694,16 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	{	
 		System.out.println("Restarting");
 		
-		Place[] places;
-		places = colony.getPlaces();
-		for(Place p : places)
-		{
-			colony.removeAnt(p, true);
-		}
-		ArrayList<Bee> bees;
-		bees = colony.getAllBees();
-		for (Bee b : bees)
-		{
-			b.reduceArmor(100);
-		}
+		AntColony newColony = colony.purgeColony();
 		
 		mainFrame.dispose();
 		mainFrame.removeAll();
 		
-		colony = new AntColony(3, 8, 0, 25);
 		hive = Hive.makeFullHive();
 		
 		shouldRun = false;
 		
-		new AntGame(colony, hive);
+		new AntGame(newColony, hive);
 		
 		// startUp(colony, hive);
 		

@@ -47,7 +47,7 @@ class DesignByContract {
      */
     @Test
     void checkIfFoodInColonyIsSufficient() {
-        colony = new AntColony(3, 8,0,8);
+        colony = new AntColony(3, 8, 0, 8);
         if(colony.getFood() < 10){
             String errMsg = "Sorry! Insufficient Food to start game.";
             JOptionPane.showMessageDialog(null, errMsg);

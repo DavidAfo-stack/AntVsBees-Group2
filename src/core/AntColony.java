@@ -17,13 +17,17 @@ public class AntColony
 	public static final String QUEEN_NAME = "AntQueen"; //name of the Queen's place
 	public static final int MAX_TUNNEL_LENGTH = 8; // ==Niall== I tried changing this, it is 8 for a reason.
 	
+	private int startingFood; // So that the starting amount of food can be accessed for restarting the game.
 	private int food; //amount of food available
-	private Place queenPlace; //where the queen is
+	public Place queenPlace; //where the queen is
 	public ArrayList<Place> places; //the places in the colony
 	private ArrayList<Place> beeEntrances; //places which bees can enter (the starts of the tunnels)
 	public boolean paused; // ==Niall== True if the game is paused
 	private boolean queenExists; // ==Niall== To check if the Queen exists, so that more than one cannot be placed.
 	private int speed; //==Niall== A method of changing the speed of the bees for the difficulty setting.
+	private int tunnelLength;
+	private int numTunnels;
+	
 	
 	/**
 	 * Creates a new ant colony with the given layout.
@@ -38,8 +42,11 @@ public class AntColony
 	public AntColony(int numTunnels, int tunnelLength, int speed, int startingFood)
 	{
 		//simulation values
+		this.startingFood = startingFood;
 		this.food = startingFood;
 		this.speed = speed;
+		this.tunnelLength = tunnelLength;
+		this.numTunnels = numTunnels;
 		//init variables
 		places = new ArrayList<Place>();
 		beeEntrances = new ArrayList<Place>();
@@ -91,6 +98,11 @@ public class AntColony
 		return queenPlace;
 	}
 	
+	public int getStartingFood() 
+	{
+		return startingFood;
+	}
+	
 	/**
 	 * Returns the amount of available food
 	 * @return the amount of available food
@@ -99,6 +111,7 @@ public class AntColony
 	{
 		return food;
 	}
+	
 	
 	/**
 	 * Increases the amount of available food
@@ -284,4 +297,40 @@ public class AntColony
 	{
 		return speed;
 	}
+	
+	/** Purges the current colony of all ants and bees, and returns a new colony.
+	 * 
+	 * @return AntColony
+	 */
+	public AntColony purgeColony()
+	{
+		AntColony newColony;
+		
+		System.out.println("Purging colony");
+		
+		queenPlace = new Place(QUEEN_NAME);
+		queenExists = false;
+		
+		ArrayList<Ant> ants;
+		
+		ants = getAllAnts();
+		
+		for (Ant ant : ants)
+		{
+			ant.reduceArmor(100);
+			
+			System.out.println("Ant Damaged");
+		}
+		
+		ArrayList<Bee> bees;
+		bees = getAllBees();
+		for (Bee b : bees)
+		{
+			b.reduceArmor(100);
+		}
+		
+		newColony = new AntColony(numTunnels, tunnelLength, speed, startingFood);
+		return newColony;
+	}
+	
 }
