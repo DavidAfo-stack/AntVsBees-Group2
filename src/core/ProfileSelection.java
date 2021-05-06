@@ -1,6 +1,5 @@
 package core;
 
-import java.awt.Dimension;
 import java.io.IOException;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -13,75 +12,72 @@ public class ProfileSelection
 {
 	private static Serialize serializer;
 	
-	private JFrame profileFrame;
-	private JPanel profilePanel;
+	private static JFrameHandler frameHandler;
 	private JButton newProfileButton;
 	private JButton selectProfileButton;
 	private JButton quitButton;
 	private static JComboBox<String> profileList;
-	public static final Dimension FRAME_SIZE = new Dimension(300, 300);
 	public ProfileCreator creator;
 	
 	public String profile;
 	
 	public ProfileSelection() throws ClassNotFoundException, IOException
 	{
+		frameHandler = new JFrameHandler();
+		
 		serializer = new Serialize();
 		
-		setUpFrame();
-		setUpPanel();
-		setUpComboBox();
-		setUpButtons();
+		setUpFrame(frameHandler.frame);
+		setUpPanel(frameHandler.panel, frameHandler.frame);
+		setUpComboBox(frameHandler.panel);
+		setUpButtons(frameHandler.panel);
 		
 		while (!profileSelected()) {
 			buttonCheck();
-			profilePanel.revalidate();
-			profilePanel.repaint();
+			frameHandler.panel.revalidate();
+			frameHandler.panel.repaint();
 		}
 		
-		profileFrame.dispose();
+		frameHandler.frame.dispose();
 	}
 	
-	private void setUpFrame()
+	private void setUpFrame(JFrame frame)
 	{
-		profileFrame = new JFrame("Ants vs Some Bees");
+		frame.setTitle("Ants vs Some Bees");
 		
-		profileFrame.setMinimumSize(profileFrame.getPreferredSize());
-		profileFrame.setSize(FRAME_SIZE);
-		profileFrame.setResizable(true);
-		profileFrame.setLayout(null);
-		profileFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		profileFrame.setVisible(true);
+//		frame.setMinimumSize(frame.getPreferredSize());
+//		frame.setSize(FRAME_SIZE);
+//		frame.setResizable(true);
+//		frame.setLayout(null);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 	}
 	
-	private void setUpPanel()
+	private void setUpPanel(JPanel panel, JFrame frame)
 	{
-		profilePanel = new JPanel();
-		
-		profilePanel.setBounds(70, 70, 150, 150);
-		profilePanel.setVisible(true);
-		profileFrame.add(profilePanel);
+		panel.setBounds(70, 70, 150, 150);
+		panel.setVisible(true);
 	}
 	
-	private void setUpButtons()
+	private void setUpButtons(JPanel panel)
 	{
 		newProfileButton = new JButton("Create a new Profile");
 		selectProfileButton = new JButton("Select Profile");
 		quitButton = new JButton("Quit");
 		
-		profilePanel.add(selectProfileButton);
-		profilePanel.add(Box.createVerticalStrut(20));
-		profilePanel.add(newProfileButton);
-		profilePanel.add(Box.createVerticalStrut(20));
-		profilePanel.add(quitButton);
+		panel.add(selectProfileButton);
+		panel.add(Box.createVerticalStrut(20));
+		panel.add(newProfileButton);
+		panel.add(Box.createVerticalStrut(20));
+		panel.add(quitButton);
 	}
 	
-	private void setUpComboBox() throws ClassNotFoundException, IOException
+	private void setUpComboBox(JPanel panel) throws ClassNotFoundException, IOException
 	{
 		profileList = new JComboBox<String>();
 		getProfiles();
 		
-		profilePanel.add(profileList);
+		panel.add(profileList);
 	}
 	
 	private void buttonCheck() throws ClassNotFoundException, IOException

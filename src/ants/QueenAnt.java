@@ -34,15 +34,4 @@ public class QueenAnt extends ThrowerAnt
 			target.reduceArmor(this.damage);
 		}
 	}
-	
-    @Override
-	public void reduceArmor(int amount)
-	{
-		this.armor -= amount;
-		if(this.armor <= 0)
-		{
-			System.out.println(this+" ran out of armor and expired");
-			leavePlace();
-		}
-	}
 }

@@ -10,7 +10,7 @@ import java.util.Random;
  * @author Joel
  * @version Fall 2014
  */
-public class Place implements PriorityAct
+public class Place
 {
 	private String name; //a name we can use for debugging
 	private Place exit; //where you leave this place to
@@ -83,7 +83,6 @@ public class Place implements PriorityAct
 			return priorityAnt(); // This isn't good, prevents ants under bodyguard ant from acting, this needs to return all ants.
 	}
 
-	@Override
 	public Ant priorityAnt() {
 		for (Ant a : ants)
 		{
