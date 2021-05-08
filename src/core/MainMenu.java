@@ -1,7 +1,5 @@
 package core;
 
-import java.awt.Dimension;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -11,27 +9,26 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class MainMenu 
+public class MainMenu
 {
 	// The difficulty of this could be altered to change the number of bees spawned 
 	
 	/*
 	 * Values related to the main menu JFrame
 	 */
-	public static JFrame mainMenu;
-	public static JPanel menuPanel;
-	private static JButton diff1;
-	private static JButton diff2;
-	private static JButton diff3;
-	private static JButton close;
-	private static JButton changeProfile;
-	public static final Dimension FRAME_SIZE = new Dimension(300,300);
+	private static JFrameHandler frameHandler;
+	
+	private static JButton diff1; // Easy difficulty
+	private static JButton diff2; // Medium difficulty
+	private static JButton diff3; // Hard difficulty
+	private static JButton close; // Close button
+	private static JButton changeProfile; // Button to open profile selector.
 	
 	/*
 	 * Player profile values
 	 */
-	private static String playerProfile;
-	private static ProfileSelection selector;
+	private static String playerProfile; // The selected player profile.
+	private static ProfileSelection selector; // A reference to the profile selector.
 	
 	/*
 	 * Values related to the creation of a new instance of the game.
@@ -42,9 +39,9 @@ public class MainMenu
 	
 	public MainMenu() throws ClassNotFoundException, IOException, UnsupportedAudioFileException, LineUnavailableException
 	{
-		setUpMenu();
-		setUpPanel();
-		setUpButtons();
+		frameHandler = new JFrameHandler();
+
+		setUpButtons(frameHandler.panel);
 		
 		changeProfile();
 		
@@ -53,10 +50,10 @@ public class MainMenu
 		{
 			handleButtons();
 			// mainMenu.revalidate();
-			mainMenu.repaint();
+			frameHandler.frame.repaint();
 		}
 		
-		mainMenu.dispose();
+		frameHandler.frame.dispose();
 	}
 	
 	private static void handleButtons() throws IOException, UnsupportedAudioFileException, LineUnavailableException, ClassNotFoundException
@@ -101,47 +98,31 @@ public class MainMenu
 				return;
 			}
 		}
-	
-	private static void setUpMenu()
-	{
-		mainMenu = new JFrame("Ants vs some Bees Main Menu");
-		mainMenu.setSize(FRAME_SIZE);
-		mainMenu.setResizable(false);
-		mainMenu.setLayout(null);
-		mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// mainMenu.setVisible(true);
-	}
-	
-	private static void setUpPanel()
-	{
-		menuPanel = new JPanel();
-		menuPanel.setBounds(60, 50, 150, 200);
-		menuPanel.setVisible(true);
-		mainMenu.add(menuPanel);
-	}
-	
-	private static void setUpButtons()
-	{
+
+	private static void setUpButtons(JPanel panel)
+	{	
 		diff1 = new JButton("Easy");
 		diff2 = new JButton("Medium");
 		diff3 = new JButton("Hard");
 		close = new JButton("Quit");
 		changeProfile = new JButton("Change Profile");
 		
-		menuPanel.add(diff1);
-		menuPanel.add(Box.createVerticalStrut(20));
-		menuPanel.add(diff2);
-		menuPanel.add(Box.createVerticalStrut(20));
-		menuPanel.add(diff3);
-		menuPanel.add(Box.createVerticalStrut(20));
-		menuPanel.add(changeProfile);
-		menuPanel.add(Box.createVerticalStrut(20));
-		menuPanel.add(close);
+		panel.add(diff1);
+		panel.add(Box.createVerticalStrut(20));
+		panel.add(diff2);
+		panel.add(Box.createVerticalStrut(20));
+		panel.add(diff3);
+		panel.add(Box.createVerticalStrut(20));
+		panel.add(changeProfile);
+		panel.add(Box.createVerticalStrut(20));
+		panel.add(close);
 	}
 
 	private static void changeProfile() throws ClassNotFoundException, IOException
 	{
-		mainMenu.setVisible(false);
+		JFrame thisFrame = frameHandler.frame;
+		
+		thisFrame.setVisible(false);
 		
 		selector = new ProfileSelection();
 		
@@ -149,7 +130,7 @@ public class MainMenu
 		
 		selector = null;
 		
-		mainMenu.setVisible(true);
+		thisFrame.setVisible(true);
 	}
 	
 }

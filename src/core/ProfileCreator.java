@@ -12,12 +12,11 @@ import javax.swing.JTextField;
 
 public class ProfileCreator 
 {
-	private JFrame creatorFrame;
-	private JPanel creatorPanel;
+	private static JFrameHandler frameHandler;
+	
 	private JTextField creatorTextField;
 	private JLabel label1;
 	private JButton createButton; // Submit Button
-	private Dimension FRAME_SIZE = new Dimension(300, 300);
 	private ProfileSelection selector;
 	public Boolean profileCreated;
 	
@@ -25,14 +24,16 @@ public class ProfileCreator
 	
 	public ProfileCreator(ProfileSelection selector) throws ClassNotFoundException, IOException
 	{
+		frameHandler = new JFrameHandler();
+		
 		this.selector = selector;
 		profileCreated = false;
 		
-		setUpFrame();
-		setUpPanel();
-		setUpLabel();
-		setUpTextField();
-		setUpButton();
+		setUpFrame(frameHandler.frame);
+		setUpPanel(frameHandler.panel);
+		setUpLabel(frameHandler.panel);
+		setUpTextField(frameHandler.panel);
+		setUpButton(frameHandler.panel);
 		
 		mainMethod();
 	}
@@ -41,56 +42,46 @@ public class ProfileCreator
 	{
 		while (!profileCreated)
 		{
-			System.out.println("asdf"); // For some reason, if this is not here, the submit button won't work, I don't know why
-			
 			buttonCheck();
+			
+			frameHandler.frame.repaint(); // Without this the button does not work.
 		}
 		
 		exitCreator();
 	}
 	
-	private void setUpFrame()
+	private void setUpFrame(JFrame frame)
 	{
-		creatorFrame = new JFrame("Create a new player profile");
-		
-		creatorFrame.setSize(FRAME_SIZE);
-		creatorFrame.setResizable(false);
-		creatorFrame.setLayout(null);
-		creatorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Set this so that it won't break the entire system
-		creatorFrame.setVisible(true);
-		creatorFrame.setAlwaysOnTop(true);
+		frame.setTitle("Create a new player profile");
+		frame.setVisible(true);
+		frame.setAlwaysOnTop(true);
 	}
 	
-	private void setUpPanel()
+	private void setUpPanel(JPanel panel)
 	{
-		creatorPanel = new JPanel();
-		
-		creatorPanel = new JPanel();
-		creatorPanel.setBounds(-10, 25, 300, 300);
-		creatorPanel.setVisible(true);
-		creatorFrame.add(creatorPanel);
+		panel.setBounds(-10, 25, 300, 300);
 	}
 	
-	private void setUpButton()
+	private void setUpButton(JPanel panel)
 	{
 		createButton = new JButton("Submit");
 		
-		creatorPanel.add(createButton);
+		panel.add(createButton);
 	}
 	
-	private void setUpTextField()
+	private void setUpTextField(JPanel panel)
 	{
 		creatorTextField = new JTextField();
 		
 		creatorTextField.setPreferredSize(new Dimension(200, 20));
-		creatorPanel.add(creatorTextField);
+		panel.add(creatorTextField);
 	}
 
-	private void setUpLabel()
+	private void setUpLabel(JPanel panel)
 	{
 		label1 = new JLabel("Please enter a new profile name below");
 		
-		creatorPanel.add(label1);
+		panel.add(label1);
 	}
 	
 	private void buttonCheck() throws ClassNotFoundException, IOException
@@ -115,7 +106,7 @@ public class ProfileCreator
 	{
 		selector.creator = null;
 		
-		creatorFrame.dispose();
+		frameHandler.frame.dispose();
 	}
 
 	private PlayerProfile createProfile()

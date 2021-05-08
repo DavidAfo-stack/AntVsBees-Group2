@@ -1,9 +1,7 @@
 package ants;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import core.Ant;
 import core.AntColony;
-import core.Bee;
 
 /**
  * @author David Afolabi

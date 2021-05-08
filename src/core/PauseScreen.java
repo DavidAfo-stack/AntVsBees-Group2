@@ -1,24 +1,17 @@
 package core;
 
-import org.w3c.dom.html.HTMLImageElement;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.io.File;
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 
 public class PauseScreen
 
 {
 	AntColony colony;
 	
-	JFrame pauseScreen;
-	JPanel pausePanel;
+	private static JFrameHandler frameHandler;
+	
 	JFrame gameInfoScreen  = new JFrame("Game Info"); //David-> For the game instruction
 	JButton continueButton = new JButton("Continue");
 	JButton restartButton = new JButton("Restart");
@@ -26,7 +19,6 @@ public class PauseScreen
 	JButton quitButton = new JButton("Quit");
 	JButton generalGuideButton, harvesterAntButton, throwerAntButton, hungryAntButton, fireAntButton, ninjaAntButton, wallAntButton, scubaAntButton, queenAntButton, bodyGuardAntButton; //David->Initialize buttons menu guide
 
-	public static final Dimension FRAME_SIZE = new Dimension(300,300);
 	public static final Dimension GUIDESCREEN_SIZE = new Dimension(300, 600);
 	private boolean open = false;
 	public boolean restart = false;
@@ -49,12 +41,11 @@ public class PauseScreen
 		open = true;
 		// This creates a JFrame with a single button, at present, I don't know why the button takes up the entire window, but it functions for now.
 		
-		setUpPauseScreen();
-		setUpJpanel();
-		addButtons();
+		frameHandler = new JFrameHandler();
 		
-		pauseScreen.add(pausePanel);
-		pauseScreen.setVisible(true);
+		addButtons(frameHandler.panel);
+		frameHandler.frame.setVisible(true);
+		frameHandler.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
 		MainPauseLoop();
 
@@ -360,29 +351,13 @@ public class PauseScreen
 		generalGuideButton.setBackground(Color.YELLOW);
 	}
 
-	private void setUpPauseScreen()
-	{
-		pauseScreen = new JFrame("Pause Screen");
-		pauseScreen.setSize(FRAME_SIZE);
-		pauseScreen.setAlwaysOnTop(true);
-		pauseScreen.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Makes sure that the window cannot be closed by the operating system interface
-		// As this would cause issues.
-		pauseScreen.setLayout(null);
-		pauseScreen.setResizable(false);
-	}
-	
-	private void setUpJpanel()
-	{
-		pausePanel = new JPanel();
-		pausePanel.setBounds(80, 80, 100, 150);
-		pausePanel.setVisible(true);
-	}
-	
 	public void MainPauseLoop()
 	{
 		continueButtonCheck();
 		quitButtonCheck();
 		restartButtonCheck();
+		
+		// frameHandler.frame.repaint();
 	}
 	
 	private void continueButtonCheck()
@@ -409,18 +384,18 @@ public class PauseScreen
 		}
 	}
 	
-	private void addButtons()
+	private void addButtons(JPanel panel)
 	{
-		pausePanel.add(continueButton);
-		pausePanel.add(restartButton);
-		pausePanel.add(gameInfoButton);// add new button for game instruction ==David
-		pausePanel.add(quitButton);
+		panel.add(continueButton);
+		panel.add(restartButton);
+		panel.add(gameInfoButton);// add new button for game instruction ==David
+		panel.add(quitButton);
 	}
 	
 	public void Continue()
-	{
+	{	
 		open = false;
-		pauseScreen.dispose(); // Disposes of the JFrame so that it can be freshly re-made when needed.
+		frameHandler.frame.dispose(); // Disposes of the JFrame so that it can be freshly re-made when needed.
 	}
 	
 	private void Quit()
@@ -431,7 +406,7 @@ public class PauseScreen
 	public void RestartGame()
 	{
 		restart = true;
-		pauseScreen.dispose();
+		frameHandler.frame.dispose();
 	}
 	
 	public boolean getOpen()
