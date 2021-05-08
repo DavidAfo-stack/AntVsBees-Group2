@@ -4,7 +4,7 @@ package core;
  * Represents a Bee
  * @author YOUR NAME HERE
  */
-public class Bee extends Insect implements StunSlowInterface {
+public class Bee extends Insect {
 	private static final int DAMAGE = 1;
 	int stun_action = 0; // number of stun remaining
 	int slow_action = 0;
@@ -100,14 +100,12 @@ public class Bee extends Insect implements StunSlowInterface {
 		slow_action -= 1;
 	}
     //David=> stun action of the stun thrower ant
-	@Override
 	public void stun_effect(int i) {
 		if(this.stun_action<i){
 			this.stun_action = i;
 		}
 	}
 	//David => slow action of the slow thrower ant
-	@Override
 	public void slow_effect(int i){
 		if(this.slow_action < i) {
 			this.slow_action = i;
