@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 public class ProfileSelection
 {
-	private static Serialize serializer;
+	private static SerializeHandler serializer;
 	
 	private static JFrameHandler frameHandler;
 	private JButton newProfileButton;
@@ -25,7 +25,7 @@ public class ProfileSelection
 	{
 		frameHandler = new JFrameHandler();
 		
-		serializer = new Serialize();
+		serializer = new SerializeHandler();
 		
 		setUpFrame(frameHandler.frame);
 		setUpPanel(frameHandler.panel, frameHandler.frame);
@@ -132,7 +132,7 @@ public class ProfileSelection
 
 	public static void serializeProfileHandler(PlayerProfile pp) throws ClassNotFoundException, IOException
 	{
-		for (PlayerProfile profile : Serialize.playerProfiles)
+		for (PlayerProfile profile : SerializeHandler.playerProfiles)
 		{
 			if (profile.getPlayerName().matches(pp.getPlayerName()))
 			{

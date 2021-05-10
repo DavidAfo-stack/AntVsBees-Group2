@@ -17,9 +17,10 @@ public class PauseScreen
 	JButton restartButton = new JButton("Restart");
 	JButton gameInfoButton = new JButton("Game Guide");// David-> initialize button for game description
 	JButton quitButton = new JButton("Quit");
-	JButton generalGuideButton, harvesterAntButton, throwerAntButton, hungryAntButton, fireAntButton, ninjaAntButton, wallAntButton, scubaAntButton, queenAntButton, bodyGuardAntButton; //David->Initialize buttons menu guide
+	JButton generalGuideButton, harvesterAntButton, throwerAntButton, hungryAntButton, fireAntButton, ninjaAntButton,
+			wallAntButton, scubaAntButton, queenAntButton, bodyGuardAntButton, longThrowerBtn, shortThrowerBtn, stunBtn, slowBtn, beeBtn; //David->Initialize buttons menu guide
 
-	public static final Dimension GUIDESCREEN_SIZE = new Dimension(300, 600);
+	public static final Dimension GUIDESCREEN_SIZE = new Dimension(300, 700);
 	private boolean open = false;
 	public boolean restart = false;
 	public boolean exists = false;
@@ -32,7 +33,7 @@ public class PauseScreen
 	
 	
 	public void createWindow ()
-	{	
+	{
 		if (exists) // The exists boolean is used to check if the window has been created already, if so, it prevents another from being created.
 		{
 			return;
@@ -250,6 +251,101 @@ public class PauseScreen
 					}
 				});
 
+				//help guide for slow thrower ant
+				slowBtn.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Runnable runnable = ()->{
+							String slowThrowerAntAbility = "<html><body width='%1s'>"
+									+ "<h1>SlowThrower Ant</h1>"
+									+ "<h3>Applies slow effect to a bee for 3 turns.</h3>"
+									+ "</body></html>";
+							ImageIcon img =  new ImageIcon("img/ant_slowthrower.gif");
+							JLabel label = new JLabel(img);
+							label.setText(slowThrowerAntAbility);
+							JOptionPane.showMessageDialog(null, label);
+
+						};
+						SwingUtilities.invokeLater(runnable);
+					}
+				});
+
+				//help guide for stun thrower ant
+				stunBtn.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Runnable runnable = ()->{
+							String stunThrowerAntAbility = "<html><body width='%1s'>"
+									+ "<h1>StunThrower Ant</h1>"
+									+ "<h3>Applies stun effect to a bee for 1 turn.</h3>"
+									+ "</body></html>";
+							ImageIcon img =  new ImageIcon("img/ant_stun.gif");
+							JLabel label = new JLabel(img);
+							label.setText(stunThrowerAntAbility);
+							JOptionPane.showMessageDialog(null, label);
+
+						};
+						SwingUtilities.invokeLater(runnable);
+					}
+				});
+
+				//help guide for short thrower ant
+				shortThrowerBtn.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Runnable runnable = ()->{
+							String shortThrowerAntAbility = "<html><body width='%1s'>"
+									+ "<h1>ShortThrower Ant</h1>"
+									+ "<h3>Throw leaves at bees at most 2 places away.</h3>"
+									+ "</body></html>";
+							ImageIcon img =  new ImageIcon("img/ant_shortthrower.gif");
+							JLabel label = new JLabel(img);
+							label.setText(shortThrowerAntAbility);
+							JOptionPane.showMessageDialog(null, label);
+
+						};
+						SwingUtilities.invokeLater(runnable);
+					}
+				});
+
+				//help guide for long thrower ant
+				longThrowerBtn.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Runnable runnable = ()->{
+							String longThrowerAntAbility = "<html><body width='%1s'>"
+									+ "<h1>LongThrower Ant</h1>"
+									+ "<h3>Throw leaves at bees at least 4 places away.</h3>"
+									+ "</body></html>";
+							ImageIcon img =  new ImageIcon("img/ant_longthrower.gif");
+							JLabel label = new JLabel(img);
+							label.setText(longThrowerAntAbility);
+							JOptionPane.showMessageDialog(null, label);
+
+						};
+						SwingUtilities.invokeLater(runnable);
+					}
+				});
+
+				//help guide for bee
+				beeBtn.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Runnable runnable = ()->{
+							String beeAbility = "<html><body width='%1s'>"
+									+ "<h1>Bee</h1>"
+									+ "<h3>Damage ants in the colony.</h3>"
+									+ "</body></html>";
+							ImageIcon img =  new ImageIcon("img/bee.gif");
+							JLabel label = new JLabel(img);
+							label.setText(beeAbility);
+							JOptionPane.showMessageDialog(null, label);
+
+						};
+						SwingUtilities.invokeLater(runnable);
+					}
+				});
+
 				//general guide for the game
 				generalGuideButton.addActionListener(new ActionListener() {
 					@Override
@@ -298,6 +394,12 @@ public class PauseScreen
 		scubaAntButton = new JButton("Scuba-Ant-Ability");
 		queenAntButton = new JButton("Queen-Ant-Ability");
 		bodyGuardAntButton = new JButton("BodyGuard-Ant-Ability");
+		longThrowerBtn = new JButton("LongThrowerAnt-Ability");
+		shortThrowerBtn = new JButton("ShortThrowerAnt-Ability");
+		stunBtn = new JButton("StunThrowerAnt-Ability");
+		slowBtn = new JButton("SlowThrowerAnt-Ant-Ability");
+		beeBtn = new JButton("Bee-Ability");
+
 		//add buttons
 		gameInfoScreen.add(generalGuideButton);
 		gameInfoScreen.add(harvesterAntButton);
@@ -309,6 +411,11 @@ public class PauseScreen
 		gameInfoScreen.add(scubaAntButton);
 		gameInfoScreen.add(queenAntButton);
 		gameInfoScreen.add(bodyGuardAntButton);
+		gameInfoScreen.add(slowBtn);
+		gameInfoScreen.add(stunBtn);
+		gameInfoScreen.add(shortThrowerBtn);
+		gameInfoScreen.add(longThrowerBtn);
+		gameInfoScreen.add(beeBtn);
 		//harvester ant btn
 		harvesterAntButton.setBounds(50,30,170,40);
 		harvesterAntButton.setVisible(true);
@@ -345,8 +452,28 @@ public class PauseScreen
 		bodyGuardAntButton.setBounds(50,350,170,40);
 		bodyGuardAntButton.setVisible(true);
 		bodyGuardAntButton.setBackground(Color.YELLOW);
+		//slow thrower ant button
+		slowBtn.setBounds(50,390,170,40);
+		slowBtn.setVisible(true);
+		slowBtn.setBackground(Color.YELLOW);
+		//stun thrower ant button
+		stunBtn.setBounds(50,430,170,40);
+		stunBtn.setVisible(true);
+		stunBtn.setBackground(Color.YELLOW);
+		//short thrower ant button
+		shortThrowerBtn.setBounds(50,470,170,40);
+		shortThrowerBtn.setVisible(true);
+		shortThrowerBtn.setBackground(Color.YELLOW);
+		//long thrower ant button
+		longThrowerBtn.setBounds(50,510,170,40);
+		longThrowerBtn.setVisible(true);
+		longThrowerBtn.setBackground(Color.YELLOW);
+		//bee button
+		beeBtn.setBounds(50,550,170,40);
+		beeBtn.setVisible(true);
+		beeBtn.setBackground(Color.YELLOW);
 		//help button
-		generalGuideButton.setBounds(50,390,170,40);
+		generalGuideButton.setBounds(50,590,170,40);
 		generalGuideButton.setVisible(true);
 		generalGuideButton.setBackground(Color.YELLOW);
 	}

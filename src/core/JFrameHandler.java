@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * Nial and David
+ */
 public class JFrameHandler 
 {
 	public static JFrame frame;
