@@ -59,12 +59,12 @@ public class MainMenu
 	private static void handleButtons() throws IOException, UnsupportedAudioFileException, LineUnavailableException, ClassNotFoundException
 	{
 		//while (diff <= 0)
-			// System.out.println("Handling Buttons"); // For some reason, commenting this out makes the buttons not work.
+			// // // System.out.println("Handling Buttons"); // For some reason, commenting this out makes the buttons not work.
 		
 			if (diff1.getModel().isPressed())
 			{
 				// Easy selected
-				System.out.println("Easy Selected");
+				// // System.out.println("Easy Selected");
 				diff = 1;
 			
 				AntsVsSomeBees.launchGame(1, 8, 4, 40); // Spawns 1 tunnel that is 8 places in length, turn length is 4 seconds and starting food is 40.
@@ -73,7 +73,7 @@ public class MainMenu
 			else if (diff2.getModel().isPressed())
 			{
 				// Medium selected
-				System.out.println("Medium Selected");
+				// // System.out.println("Medium Selected");
 				diff = 2;
 			
 				AntsVsSomeBees.launchGame(3, 8, 3, 25); // Spawns 3 tunnels that are 8 places in length, turn length is 3 seconds and starting food is 25
@@ -81,14 +81,14 @@ public class MainMenu
 			else if (diff3.getModel().isPressed())
 			{
 				// Hard Selected
-				System.out.println("Hard Selected");
+				// // System.out.println("Hard Selected");
 				diff = 3;
 			
 				AntsVsSomeBees.launchGame(4, 7, 2, 30); // Spawns 4 tunnels that are 7 places in length, turn length is 2 seconds and starting food is 20
 			}
 			else if (close.getModel().isPressed())
 			{
-				System.out.println("Closing Game");
+				// // System.out.println("Closing Game");
 				System.exit(0);
 			}
 			else if (changeProfile.getModel().isPressed())

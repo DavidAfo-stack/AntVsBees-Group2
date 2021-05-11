@@ -11,7 +11,7 @@ public class BodyguardAnt extends Ant
 	{	
 		super(2, 4, false, true, true);
 		
-		System.out.println("asdf" + this.overlays);
+		// // System.out.println("asdf" + this.overlays);
 	}
 	
 	@Override

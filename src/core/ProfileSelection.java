@@ -100,7 +100,7 @@ public class ProfileSelection
 			{
 				profile = (String) profileList.getSelectedItem();
 				
-				System.out.println("Profile is: " + profile);
+				// // System.out.println("Profile is: " + profile);
 			}
 		}
 		
@@ -136,7 +136,7 @@ public class ProfileSelection
 		{
 			if (profile.getPlayerName().matches(pp.getPlayerName()))
 			{
-				System.out.println("A profile with this name has already been created, no profile has been added");
+				// // System.out.println("A profile with this name has already been created, no profile has been added");
 				JOptionPane.showMessageDialog(null, "Profile name is not valid");
 				
 				break;

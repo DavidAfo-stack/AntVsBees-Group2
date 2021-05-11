@@ -26,7 +26,7 @@ public class ScubaThrowerAnt extends ThrowerAnt
 		else
 			damage = defaultDamage; // Sets the ant's damage to default otherwise
 		
-		System.out.println("Ant: " + this + " damage is: " + damage);
+		// // System.out.println("Ant: " + this + " damage is: " + damage);
 		
 		Bee target = getTarget();
 		if(target != null)
