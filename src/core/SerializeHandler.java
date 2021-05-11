@@ -9,12 +9,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Serialize
+public class SerializeHandler
 {
 	static String filePath = "./Player Profiles/";
 	static ArrayList<PlayerProfile> playerProfiles = new ArrayList<PlayerProfile>();
 	
-	public Serialize() throws ClassNotFoundException, IOException
+	public SerializeHandler() throws ClassNotFoundException, IOException
 	{	
 		// LoadFiles(); // Removed this as it caused files to be loaded twice.
 	}
