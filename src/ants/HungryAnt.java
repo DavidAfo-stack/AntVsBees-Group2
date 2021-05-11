@@ -40,14 +40,14 @@ public class HungryAnt extends Ant {
             target.reduceArmor(beeArmor);
             eatBee = true;
             turns = 0;
-            //System.out.println("Killed");
+            //// // System.out.println("Killed");
         }
         //check if ant has digested bee after 3 turns
         if(eatBee){
             turns++;
             if(turns>=3){
                 eatBee = false;
-                //System.out.println("Ant can now eat bee");
+                //// // System.out.println("Ant can now eat bee");
             }
         }
 

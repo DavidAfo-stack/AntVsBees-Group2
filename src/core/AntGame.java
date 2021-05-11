@@ -205,7 +205,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		if(frame == 0) //at the start of a turn // ==Niall== So this means that the start of a turn is determined by the frames, so pausing has to be
 			// done in the drawing of the frames.
 		{
-			System.out.println("TURN: "+turn);
+			// // System.out.println("TURN: "+turn);
 
 			//ants take action!
 			for(Ant ant : colony.getAllAnts())
@@ -265,7 +265,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 		
 		//ADVANCE THE CLOCK COUNTERS
 		frame++; //count the frame
-		//System.out.println("frame: "+frame);
+		//// // System.out.println("frame: "+frame);
 		if(frame == FPS*TURN_SECONDS){ //if TURN seconds worth of frames
 			turn++; //next turn
 			frame = 0; //reset frame
@@ -542,14 +542,14 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 			}
 			
 			
-			System.out.println("Pause button pressed");
+			// // System.out.println("Pause button pressed");
 			
 			return true;
 		}
 		
 		if (paused) // ==Niall== This checks if paused is true and returns, preventing any frames from being drawn.
 		{
-			System.out.println("PAUSED");
+			// // System.out.println("PAUSED");
 			
 			if (pauseScreen.getOpen())
 			{
@@ -587,7 +587,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 			}
 			sc.close();
 		}catch(IOException e){ //for IOException, NumberFormatException, ArrayIndex exception... basically if anything goes wrong, don't crash
-			System.out.println("Error loading insect gui properties: " + e);
+			// // System.out.println("Error loading insect gui properties: " + e);
 		}
 
 	}
@@ -692,7 +692,7 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 	 */
 	public void RestartGame()
 	{	
-		System.out.println("Restarting");
+		// // System.out.println("Restarting");
 		
 		AntColony newColony = colony.purgeColony();
 		

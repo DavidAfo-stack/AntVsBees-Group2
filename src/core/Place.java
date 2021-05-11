@@ -35,7 +35,7 @@ public class Place
 		this.ants = new ArrayList<Ant>();
 		this.ant = null;
 		waterLogged = GenerateWater();
-		System.out.println(waterLogged);
+		// // System.out.println(waterLogged);
 	}
 	
 	// Returns a boolean to randomly assign water to different places.
@@ -45,7 +45,7 @@ public class Place
 		
 		i = (int)Math.floor(Math.random()*(100 - 0 + 1));
 		
-		// System.out.println(i);
+		// // // System.out.println(i);
 		
 		if (i >= 80)
 		{
@@ -115,7 +115,7 @@ public class Place
 		Place p = this;
 		for(int dist = 0; p!=null && dist <= maxDistance; dist++)
 		{
-			// System.out.println("Number of Bees: " + p.bees.size());
+			// // // System.out.println("Number of Bees: " + p.bees.size());
 			
 			if(dist >= minDistance && p.bees.size() > 0)
 				return p.bees.get((int)(Math.random()*p.bees.size())); //pick a random bee
@@ -133,10 +133,10 @@ public class Place
 		Place p = this;
 		for (int dist = 0; p!=null && dist <= maxDistance; dist++)
 		{
-			System.out.println("Number of Bees: " + p.bees.size());
+			// // System.out.println("Number of Bees: " + p.bees.size());
 			if (dist >= minDistance && p.bees.size() > 0)
 			{
-				System.out.println("Bee found");
+				// // System.out.println("Bee found");
 				beeArrayList.addAll(p.bees);
 			}
 			p = p.entrance;
@@ -191,20 +191,20 @@ public class Place
 	 */
 	public void addInsect(Ant ant)
 	{
-		System.out.println("Ant arraylist " + ants);
+		// // System.out.println("Ant arraylist " + ants);
 		
 		if (!ant.canSwim && waterLogged)
 		{
-			System.out.println("this ant cannot swim");
+			// // System.out.println("this ant cannot swim");
 			return;
 		}
 		
 		if (!ants.isEmpty())
 		{
-			System.out.println("Ants is not empty");
+			// // System.out.println("Ants is not empty");
 			if (ant.overlays && !guarded)
 			{
-				System.out.println("Adding overlay ant: " + ant);
+				// // System.out.println("Adding overlay ant: " + ant);
 				ants.add(ant);
 				ant.setPlace(this);
 				guarded = true;
@@ -213,7 +213,7 @@ public class Place
 			else
 				return;
 		}
-		System.out.println("Adding ant: " + ant);
+		// // System.out.println("Adding ant: " + ant);
 		// this.ant = ant;
 		ants.add(ant);
 		ant.setPlace(this);
@@ -224,7 +224,7 @@ public class Place
 //			ant.setPlace(this);
 //		}
 //		else
-//			System.out.println("Already an ant in "+this); //report error
+//			// // System.out.println("Already an ant in "+this); //report error
 	}
 	
 	/**
@@ -258,8 +258,8 @@ public class Place
 		{
 			guarded = false;
 		}
-		else
-			System.out.println(ant + " is not in "+this);
+//		else
+//			System.out.println(ant + " is not in "+this);
 	}
 	
 	/**
@@ -273,8 +273,8 @@ public class Place
 			bees.remove(bee);
 			bee.setPlace(null);
 		}
-		else
-			System.out.println(bee + " is not in "+this);
+//		else
+			// System.out.println(bee + " is not in "+this);
 	}
 	
 	public String toString()

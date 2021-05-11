@@ -85,6 +85,6 @@ class PlaceTest {
     @Test
     void getAntsInTunnel() {
         assertEquals("WallAnt", place2.getName());
-        System.out.println(place3.getBees());
+        // // System.out.println(place3.getBees());
     }
 }

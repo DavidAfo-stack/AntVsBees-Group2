@@ -202,7 +202,7 @@ public class AntColony
 			}
 			else
 		{
-			System.out.println("Not enough food remains to place "+ant);
+			// // System.out.println("Not enough food remains to place "+ant);
 			paused = true;
 			JOptionPane.showMessageDialog(null, "Not enough food to place ant");
 			paused = false;
@@ -213,7 +213,7 @@ public class AntColony
 	{
 		if (!queenExists)
 		{
-			System.out.println("Deploying queen");
+			// // System.out.println("Deploying queen");
 			
 			queenPlace = place;
 			queenExists = true;
@@ -306,7 +306,7 @@ public class AntColony
 	{
 		AntColony newColony;
 		
-		System.out.println("Purging colony");
+		// // System.out.println("Purging colony");
 		
 		queenPlace = new Place(QUEEN_NAME);
 		queenExists = false;
@@ -319,7 +319,7 @@ public class AntColony
 		{
 			ant.reduceArmor(100);
 			
-			System.out.println("Ant Damaged");
+			// // System.out.println("Ant Damaged");
 		}
 		
 		ArrayList<Bee> bees;

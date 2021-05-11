@@ -69,7 +69,7 @@ public abstract class Insect
 		this.armor -= amount;
 		if(this.armor <= 0)
 		{
-			System.out.println(this+" ran out of armor and expired");
+			// // System.out.println(this+" ran out of armor and expired");
 			leavePlace();
 		}
 	}
@@ -95,12 +95,12 @@ public abstract class Insect
 //	{
 //		if (insectType == "fireAnt")
 //		{
-//			System.out.println("This is a fire ant");
+//			// // System.out.println("This is a fire ant");
 //			return;
 //		}
 //		if (insectType == "throwerAnt")
 //		{
-//			System.out.println("This is a thrower ant");
+//			// // System.out.println("This is a thrower ant");
 //		}
 //	}
 	

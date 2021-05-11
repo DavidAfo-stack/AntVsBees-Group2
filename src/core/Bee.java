@@ -27,11 +27,11 @@ public class Bee extends Insect {
 	 */
 	public void sting(Ant ant) 
 	{
-		System.out.println("This bee's target is" + ant);
+		// // System.out.println("This bee's target is" + ant);
 		
 		ant.reduceArmor(DAMAGE);
 		
-		System.out.println("Damaged " + ant);
+		// // System.out.println("Damaged " + ant);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class Bee extends Insect {
 		//===> This was modified by David to handle the Ninja Ant invincible attribute
 		//The Ninja ant was implemented to not block bees in its place
 		if (this.place.getAnt() != null) {
-			System.out.println(this.place.getAnt());
+			// // System.out.println(this.place.getAnt());
 			if (this.place.getAnt().blockBeePath == false) {
 				return false;
 			}

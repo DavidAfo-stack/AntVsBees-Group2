@@ -40,7 +40,7 @@ public class SerializeHandler
 	{
 		playerProfiles.clear();
 		
-		System.out.println("Load Files has been called");
+		// System.out.println("Load Files has been called");
 		
 		CheckForProfileFolder();
 		
@@ -59,7 +59,7 @@ public class SerializeHandler
 			}
 			else 
 			{
-				System.out.println("No profile found");
+				// System.out.println("No profile found");
 				
 				return;
 			}
