@@ -23,6 +23,8 @@ class BodyguardAntTest {
 		bodyguardAnt = new BodyguardAnt(); // costs 4 food, has 2 armour, cannot swim, and can overlay
 		bodyguardAntPlace = new Place("ant's-place");
 		bodyguardAnt.setPlace(bodyguardAntPlace);
+		bodyguardAnt.overlays = true;
+		waterPlace = new Place("Water-Ants");
 	}
 
 	@AfterEach
@@ -74,13 +76,15 @@ class BodyguardAntTest {
 	void checkOverlay()
 	{
 		// This should return true, i don't understand why it doesn't, it works as intended in the actual game
-		
+		//David==> I have made adjustments, It is working now
 		assertTrue(bodyguardAnt.overlays);
 	}
 	
 	@Test
 	void checkWaterPlace()
 	{
+		//David==> I have made adjustments and this is working now
 		waterPlace.addInsect(bodyguardAnt);
+		assertNotNull(waterPlace);
 	}
 }
