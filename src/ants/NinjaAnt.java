@@ -35,7 +35,7 @@ public class NinjaAnt extends Ant {
 			damage = defaultDamage; // Sets the ant's damage to default otherwise
        Bee[] bees = this.place.getBees();
             for(Bee bee: bees){
-                 place.getClosestBee(0,3);
+                 place.getClosestBee(0,0);
                  bee.reduceArmor(this.damage);
 
         }
