@@ -5,14 +5,12 @@ import ants.QueenAnt;
 import ants.WallAnt;
 import core.Ant;
 import core.AntColony;
-import core.AntsVsSomeBees;
 import core.Place;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 

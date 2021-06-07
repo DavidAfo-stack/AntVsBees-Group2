@@ -1,10 +1,6 @@
 package Test;
 
-import ants.FireAnt;
 import ants.WallAnt;
-import core.Ant;
-import core.AntColony;
-import core.Bee;
 import core.Place;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
