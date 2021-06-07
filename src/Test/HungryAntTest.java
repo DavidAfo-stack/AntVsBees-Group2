@@ -1,7 +1,6 @@
 package Test;
 
 import ants.HungryAnt;
-import core.Ant;
 import core.Place;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

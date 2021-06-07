@@ -1,7 +1,6 @@
 package Test;
 
 import ants.FireAnt;
-import core.Bee;
 import core.Place;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
